@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -16,6 +18,14 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@application/*": ["./src/application/*"],
+      "@ports/*": ["./src/application/ports/*"],
+      "@use-cases/*": ["./src/application/use-cases/*"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@domain/*": ["./src/domain/*"],
+      "@repositories/*": ["./src/repositories/*"],
+    },
   }
 }

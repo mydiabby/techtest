@@ -10,6 +10,8 @@ services:
       DB_USER: root
       DB_PASS: pass
       DB_NAME: postgres
+      DB_LOGS: ${DB_LOGS}
+      ENV_NAME: ${ENV_NAME}
     volumes:
       - ./nest:/home/node/app
     depends_on:

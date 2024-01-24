@@ -18,13 +18,12 @@ Le but est d'évaluer globalement tes connaissances sur les deux frameworks.
 
 - L'application NestJS soit adaptée en conséquence pour permettre l'ajout d'un utilisateur via une requête POST sur la route `/users`.
 
-- Le résultat final ne doit pas permettre de créer un utilisateur avec les mêmes npm et prénom qu'un utilisateur déjà existant.
+- Le résultat final ne doit pas permettre de créer un utilisateur avec les mêmes nom et prénom qu'un utilisateur déjà existant.
 
 N'hésite pas à ajouter toute autre fonctionnalité que tu juges pertinente (tests, validation des formulaires, etc.).
 
 ## Rendu
 
 Le rendu devra être effectué sous forme de pull request sur ce repo.
-
 
 Bon courage !
