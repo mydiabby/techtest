@@ -1,0 +1,4 @@
+<mat-toolbar class="navigation" color="primary" fxLayout="row wrap" fxLayoutAlign="flex-start center" fxLayout.xs="column">
+  <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{ title }}</a>
+  <a [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">Utilisateurs</a>
+</mat-toolbar>

@@ -1,0 +1,36 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  @if(isLoading$ | async) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+  <form
+    [formGroup]="userForm"
+    (ngSubmit)="onSubmitUser()"
+  >
+  <mat-card fxLayout="column wrap" fxLayoutAlign="center center" class="card">
+    <mat-card-header fxLayout="column wrap">
+      <mat-card-title>Créer un nouvel utilisateur</mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxLayout="column">
+      <mat-form-field appearance="outline">
+        <mat-label>Prénom</mat-label>
+        <input matInput [value]="" (input)="setFirstName($event)" formControlName="firstName">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Nom</mat-label>
+        <input matInput [value]="" (input)="setLastName($event)" formControlName="lastName">
+      </mat-form-field>
+      @if(error === '409') {
+        <p class="error">L'utilisateur existe déjà.</p>
+      }
+      @if(success) {
+        <p class="success">L'utilisateur a été créé avec succès.</p>
+        <p class="info">Vous allez être rediriger dans {{ redirectionCounter() }} secondes.</p>
+      }
+    </mat-card-content>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="space-between center">
+      <button mat-flat-button type="button" color="outline" (click)="backToUserList()">Retour</button>
+      <button mat-flat-button type="submit" color="accent" [disabled]="userForm.invalid || success">Ajouter</button>
+    </mat-card-actions>
+  </mat-card>
+  </form>
+</div>

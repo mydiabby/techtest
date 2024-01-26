@@ -1,0 +1,26 @@
+.mat-mdc-header-row {
+    background: var(--deep-purple);
+    color:white;
+}
+
+.mat-mdc-footer-row {
+  background-color: #eee;
+}
+
+.mat-mdc-row:nth-child(even){
+  background-color: #eee;
+}
+
+.mat-mdc-row:nth-child(odd){
+  background-color: white;
+}
+
+h1 {
+  padding-top: 14px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+::ng-deep .mat-mdc-paginator-page-size-label{
+  display: none !important;
+}

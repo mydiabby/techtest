@@ -1,0 +1,18 @@
+a:link, a:hover, a:active, a:visited {
+  color: white;
+  text-decoration: none;
+  padding: 8px;
+  width: 120px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.navigation {
+  height: auto;
+  padding-top: 8px;
+}
+
+.active {
+  background-color: #512DA8;
+  border-radius: 8px;
+}

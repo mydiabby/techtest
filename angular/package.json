@@ -7,7 +7,9 @@
     "start:docker": "ng serve --host 0.0.0.0 --port 4200",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --runInBand"
   },
   "private": true,
   "dependencies": {
@@ -16,11 +18,13 @@
     "@angular/common": "^17.1.0",
     "@angular/compiler": "^17.1.0",
     "@angular/core": "^17.1.0",
+    "@angular/flex-layout": "^15.0.0-beta.42",
     "@angular/forms": "^17.1.0",
     "@angular/material": "^17.1.0",
     "@angular/platform-browser": "^17.1.0",
     "@angular/platform-browser-dynamic": "^17.1.0",
     "@angular/router": "^17.1.0",
+    "@ngxs/store": "^3.8.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
@@ -29,13 +33,24 @@
     "@angular-devkit/build-angular": "^17.1.0",
     "@angular/cli": "^17.1.0",
     "@angular/compiler-cli": "^17.1.0",
+    "@fluffy-spoon/substitute": "^1.208.0",
+    "@ngxs/devtools-plugin": "^3.8.2",
+    "@ngxs/logger-plugin": "^3.8.2",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.1.0",
+    "jest": "^29.7.0",
+    "jest-preset-angular": "^14.0.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.3.2"
+  },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "setupFilesAfterEnv": [
+      "./src/setupJest.ts"
+    ]
   }
 }

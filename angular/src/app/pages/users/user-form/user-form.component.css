@@ -1,0 +1,26 @@
+.mat-mdc-card {
+  margin-top: 10px;
+}
+
+.mat-mdc-card-title {
+  color: var(--deep-purple);
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+h1 {
+  padding-top: 14px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+button {
+  margin: 0 4px;
+}
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
