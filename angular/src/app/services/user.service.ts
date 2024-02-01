@@ -51,7 +51,10 @@ export class UserService {
     // }
     // console.log('update', userid, 'not found');
     // return of(null)
-
+    if (user) {
+      user.firstName = this.pascalCase(user.firstName);
+      user.lastName = this.pascalCase(user.lastName);
+    }
     return this.http.put<User>(`${environment.apiUrl}/users/${userid}`, user);
 
   }
@@ -62,6 +65,10 @@ export class UserService {
     // console.log('create', newUser, this.users);
     // this.users.push(newUser);
     // return of(newUser);
+    if (user) {
+      user.firstName = this.pascalCase(user.firstName);
+      user.lastName = this.pascalCase(user.lastName);
+    }
     return this.http.post<User>(`${environment.apiUrl}/users`, user);
   }
 
