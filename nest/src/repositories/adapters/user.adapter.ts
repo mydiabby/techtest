@@ -12,7 +12,29 @@ export class UserAdapter implements UserService {
     private usersRepository: Repository<User>,
   ) {}
 
-  getUsers(): Promise<User[]> {
+  async getUsers(): Promise<User[]> {
+    console.log('UserAdapter.getUsers');
     return this.usersRepository.find();
+  }
+
+  async getUser(id: number): Promise<User> {
+    console.log('UserAdapter.getUser', id);
+    return this.usersRepository.findOne({where: {id}});
+  }
+
+  async addUser(user: User): Promise<User> {
+    console.log('UserAdapter.addUser', user);
+    return this.usersRepository.save(user);
+  }
+
+  async deleteUser(id: number): Promise<void> {
+    console.log('UserAdapter.deleteUser', id);
+    await this.usersRepository.delete({id});
+  }
+
+  async updateUser(id: number, user: User): Promise<User> {
+    console.log('UserAdapter.updateUser', id, user);
+    await this.usersRepository.update({id}, user);
+    return this.usersRepository.findOne({where: {id}});
   }
 }

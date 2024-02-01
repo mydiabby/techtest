@@ -1,0 +1,5 @@
+.dark-bg {
+  color: var(--bright-blue);
+  background: var(--gray-400);
+  padding: 1rem;
+}

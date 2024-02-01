@@ -1,0 +1,36 @@
+<h1>{{title}}</h1>
+@if (!loading) {
+<form class="user-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <mat-form-field class="field-full-width">
+    <mat-label>Prénom</mat-label>
+    <input type="text" matInput formControlName="firstName" [errorStateMatcher]="matcher"
+           placeholder="Votre prénom">
+    @if (f.firstName.errors && f.firstName.errors.required) {
+      <mat-error>Votre <strong>prénom</strong> doit être renseigné</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field class="field-full-width">
+    <mat-label>Nom</mat-label>
+    <input type="text" matInput formControlName="lastName" [errorStateMatcher]="matcher"
+           placeholder="Votre nom">
+    @if (f.lastName.errors && f.lastName.errors.required) {
+      <mat-error>Votre <strong>nom</strong> doit être renseigné</mat-error>
+    }
+  </mat-form-field>
+
+  <div class="row">
+      <button mat-flat-button color="primary" [disabled]="submitting">
+            Sauvegarder
+      </button>
+      <button mat-flat-button color="secondary" routerLink="/users">
+        Annuler
+    </button>
+  </div>
+</form>
+} @else {
+  <div class="text-center m-5">
+    <span class="spinner-border spinner-border-lg align-center"></span>
+  </div>
+}

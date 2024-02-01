@@ -23,4 +23,3 @@ import { UserSchema } from "./repositories/schemas/user.schema";
     ],
   })
   export class UserModule {}
-  
