@@ -4,8 +4,9 @@ import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
-import { Sort, MatSortModule} from '@angular/material/sort';
+import { Sort, MatSortModule } from '@angular/material/sort';
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
@@ -15,7 +16,7 @@ function compare(a: number | string, b: number | string, isAsc: boolean) {
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [RouterLink, MatTableModule, MatButtonModule, MatIconModule, MatSortModule],
+  imports: [RouterLink, MatTableModule, MatButtonModule, MatTooltipModule, MatIconModule, MatSortModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
@@ -26,8 +27,10 @@ export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'edit'];
 
   dataSource: WritableSignal<User[]> = signal([]);
+  currentSort: Sort|null = null;
 
   sortData(sort: Sort) {
+    this.currentSort = sort;
     const data = this.users.slice();
     if (!sort.active || sort.direction === '') {
       this.dataSource.set(this.users);
@@ -60,8 +63,8 @@ export class UsersComponent implements OnInit {
       this.userService.getAll().subscribe(users => {
         this.users = users;
         this.dataSource.set(this.users);
-        this.sortData({direction: 'asc', active: 'lastName'});
-      } );
+        this.sortData({ direction: 'asc', active: 'lastName' });
+      });
 
     } catch (error) {
     }
@@ -75,7 +78,9 @@ export class UsersComponent implements OnInit {
       console.log('delete');
       this.users = this.users.filter(u => u.id !== userid);
       this.dataSource.set(this.users);
-      this.sortData({direction: 'asc', active: 'lastName'});
+      if (this.currentSort) {
+        this.sortData(this.currentSort);
+      }
     });
   }
 
