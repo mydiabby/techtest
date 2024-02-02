@@ -20,6 +20,10 @@
     }
   </mat-form-field>
 
+  @if (errorMessage.length > 0) {
+    <mat-error>{{errorMessage}}</mat-error>
+  }
+
   <div class="row">
       <button mat-flat-button color="primary" [disabled]="submitting">
             Sauvegarder

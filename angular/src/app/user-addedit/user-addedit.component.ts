@@ -36,6 +36,8 @@ export class UserAddEditComponent implements OnInit {
     submitted = false;
     matcher = new MyErrorStateMatcher();
 
+    errorMessage = '';
+
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -91,8 +93,17 @@ export class UserAddEditComponent implements OnInit {
                 () => {
                     // this.alertService.success('Utilisateur sauvegardé', { keepAfterRouteChange: true });
                     this.router.navigateByUrl('/users');
+                    this.errorMessage = '';
                 }
                 , error => {
+                    console.log(error);
+                    if (error.status === 400) {
+                      if (error?.error?.message.includes('duplicate key')) {
+                        this.errorMessage = 'Un utilisateur existe dèja avec le même nom et prénom !';
+                      }
+                    } else {
+                      this.errorMessage = error.message;
+                    }
                     // this.alertService.error(error);
                     this.submitting = false;
                 }
