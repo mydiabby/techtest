@@ -16,5 +16,12 @@ export const UserSchema = new EntitySchema<User>({
     lastName: {
       type: String,
     },
-  }
+  },
+  indices: [
+    {
+      name: 'unique_combination',
+      unique: true,
+      columns: ['firstName', 'lastName'],
+    },
+  ],
 });

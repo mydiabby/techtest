@@ -1,4 +1,4 @@
-import { Injectable, Inject } from "@nestjs/common";
+import { Injectable, Inject, HttpException, HttpStatus } from "@nestjs/common";
 import { UserService, UserServiceKey } from "../ports/user.port";
 import { User } from "src/domain/entities/user";
 
@@ -27,11 +27,19 @@ export class GetFullNamesOfAllUsers {
     }
 
     async create(user: User): Promise<User> {
-      return await this.userService.addUser(user);
+      return await this.userService.addUser(user).catch(err => {
+        throw new HttpException({
+          message: err.message
+        }, HttpStatus.BAD_REQUEST);
+      });
     }
 
     async update(id: number, user: User): Promise<User> {
-      return await this.userService.updateUser(id, user);
+      return await this.userService.updateUser(id, user).catch(err => {
+        throw new HttpException({
+          message: err.message
+        }, HttpStatus.BAD_REQUEST);
+      });;
     }
 
     async delete(id: number): Promise<void> {
