@@ -1,0 +1,11 @@
+<div id="users-list-component-wrapper">
+  <h1>Liste des utilisateurs</h1>
+
+  <mat-list>
+    <ng-container *ngFor="let user of users">
+      <mat-list-item>{{ user }}</mat-list-item>
+    </ng-container>
+  </mat-list>
+  
+  <button mat-raised-button color="primary" routerLink="/users/add">Ajouter un utilisateur</button>
+</div>

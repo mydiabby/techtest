@@ -1,0 +1,16 @@
+@use '../../../../styles/mixins' as mixins;
+
+#modal-user-already-exist-wrapper {
+  @include mixins.center-h;
+  position: relative;
+  gap: 20px;
+  height: 100%;
+  em {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  em:hover {
+    cursor: pointer;
+  }
+}

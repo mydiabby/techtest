@@ -1,0 +1,31 @@
+<div id="user-form-component-wrapper">
+  <button mat-raised-button color="primary" routerLink="/users">Liste des utilisateur</button>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Prénom</mat-label>
+      <input matInput formControlName="firstName">
+      <mat-error *ngIf="firstName.hasError('required')">
+        Champ requis.
+      </mat-error>
+      <mat-error *ngIf="firstName.hasError('pattern')">
+        Format incorrect.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Nom</mat-label>
+      <input matInput formControlName="lastName"> 
+      <mat-error *ngIf="lastName.hasError('required')">
+        Champ requis.
+      </mat-error>
+      <mat-error *ngIf="lastName.hasError('pattern')">
+        Format incorrect.
+      </mat-error>
+    </mat-form-field>
+  
+    <button mat-flat-button color="primary" [disabled]="userForm.invalid">
+      Valider
+    </button>
+  </form>
+</div>

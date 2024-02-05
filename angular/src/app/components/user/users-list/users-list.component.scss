@@ -1,0 +1,13 @@
+@use '../../../../styles/mixins' as mixins;
+
+#users-list-component-wrapper {
+  @include mixins.center-h;
+
+  h1 {
+    text-align: center;
+  }
+  
+  mat-list {
+    width: 200px;
+  }
+}

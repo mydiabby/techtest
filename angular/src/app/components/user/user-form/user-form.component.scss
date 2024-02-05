@@ -1,0 +1,12 @@
+@use '../../../../styles/mixins' as mixins;
+
+#user-form-component-wrapper {
+  height: calc(100vh - 48px);
+  @include mixins.center-h;
+  
+  form {
+    @include mixins.center-h;
+    margin-top: 20px;
+  }
+}
+

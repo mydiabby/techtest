@@ -13,6 +13,24 @@ export class UserAdapter implements UserService {
   ) {}
 
   getUsers(): Promise<User[]> {
-    return this.usersRepository.find();
+    return this.usersRepository.find({
+      order: {
+        firstName: 'ASC',
+        lastName: 'ASC',
+      },
+    });
+  }
+
+  getUser(user: User): Promise<User> {
+    return this.usersRepository.findOne({
+      where: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
+    });
+  }
+
+  postUser(user: User): void {
+    this.usersRepository.save(user);
   }
 }

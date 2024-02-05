@@ -1,7 +1,8 @@
 services:
   nest:
     build:
-      dockerfile: .docker/nest/Dockerfile
+      context: .docker/nest
+      dockerfile: Dockerfile
     restart: unless-stopped
     ports:
       - ${NEST_PORT}:3000
@@ -27,7 +28,8 @@ services:
 
   angular:
     build:
-      dockerfile: .docker/angular/Dockerfile
+      context: .docker/angular
+      dockerfile: Dockerfile
     container_name: angular
     restart: unless-stopped
     ports:
