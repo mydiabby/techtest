@@ -1,21 +1,19 @@
 import { Module } from '@nestjs/common';
-import { HealthcheckController } from './controllers/healthcheck.controller';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './user.module';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { HealthcheckController } from './controllers/healthcheck.controller';
 import { DatabaseConnectionService } from './database.service';
+import { UserModule } from './user.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({isGlobal: true}),
+    ConfigModule.forRoot({ isGlobal: true }),
     UserModule,
     TypeOrmModule.forRootAsync({
       useClass: DatabaseConnectionService,
-    })
+    }),
   ],
-  controllers: [
-    HealthcheckController
-  ],
+  controllers: [HealthcheckController],
   providers: [],
 })
 export class AppModule {}

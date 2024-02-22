@@ -1,12 +1,12 @@
-import { AfterViewInit, Component, OnInit, WritableSignal, signal } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSortModule, Sort } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink } from '@angular/router';
 import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
-import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatIconModule } from '@angular/material/icon';
-import { Sort, MatSortModule } from '@angular/material/sort';
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
@@ -20,20 +20,27 @@ function compare(a: number | string, b: number | string, isAsc: boolean) {
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent  {
 
+  private userService = inject(UserService);
 
-  users: User[] = [];
+  usersResult = this.userService.queryGetAll();
+  users = this.usersResult.result;
+
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'edit'];
 
-  dataSource: WritableSignal<User[]> = signal([]);
+  dataSource: User[] = [];
   currentSort: Sort|null = null;
 
+
+
   sortData(sort: Sort) {
+    const data = this.users().data;
+    if (!data) return;
+
     this.currentSort = sort;
-    const data = this.users.slice();
     if (!sort.active || sort.direction === '') {
-      this.dataSource.set(this.users);
+      this.dataSource = data;
       return;
     }
 
@@ -50,37 +57,28 @@ export class UsersComponent implements OnInit {
           return 0;
       }
     });
-    this.dataSource.set(sortedData);
+    this.dataSource = sortedData;
 
   }
 
-  constructor(private userService: UserService) {
+  constructor() {
+    effect(() => {
 
-  }
+      const usersResult = this.users();
+      const data = usersResult.data;
+      console.log('getting data', data);
 
-  ngOnInit() {
-    try {
-      this.userService.getAll().subscribe(users => {
-        this.users = users;
-        this.dataSource.set(this.users);
-        this.sortData({ direction: 'asc', active: 'lastName' });
-      });
-
-    } catch (error) {
-    }
-
+      if (data) {
+        this.dataSource = data;
+      }
+    })
   }
 
   userDelete(userid: number) {
     console.log('user delete ', userid);
 
     this.userService.delete(userid).subscribe(_ => {
-      console.log('delete');
-      this.users = this.users.filter(u => u.id !== userid);
-      this.dataSource.set(this.users);
-      if (this.currentSort) {
-        this.sortData(this.currentSort);
-      }
+      console.log('deleted');
     });
   }
 

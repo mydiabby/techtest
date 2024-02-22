@@ -1,27 +1,45 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams, HttpResponse } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject, map, of } from 'rxjs';
-import { User } from '../models/user'
-import { IUser } from '../interfaces/iuser'
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IUser } from '../interfaces/iuser';
+import { User } from '../models/user';
 
 import { environment } from '@environments/environment';
+
+import { QueryObserverResult, injectQuery, injectQueryClient } from '@ngneat/query';
+import { Result } from '@ngneat/query/lib/types';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+
+  private http: HttpClient = inject(HttpClient);
+  private query = injectQuery();
+  private queryClient = injectQueryClient();
+
   // users = [
   //   new User(1, 'gilles', 'coppe'),
   //   new User(2, 'joe', 'bar'),
   // ]
 
-  constructor(private http: HttpClient) {
-  }
+
 
   pascalCase(name: string) {
     return name.replace(/(\w)(\w*)/g,
         (g0,g1,g2) => {return g1.toUpperCase() + g2.toLowerCase();});
+  }
+
+  queryGetAll(): Result<QueryObserverResult<User[], Error>> {
+    return this.query({
+      queryKey: ['users'],
+      queryFn: () =>
+        lastValueFrom(
+          this.http.get<User[]>(`${environment.apiUrl}/users`),
+        )
+    });
   }
 
   getAll(): Observable<User[]> {
@@ -76,6 +94,10 @@ export class UserService {
     // this.users = this.users.filter(user => user.id !== userid);
     // console.log('delete', userid, this.users);
     // return of(this.users);
+    this.queryClient.invalidateQueries({
+      queryKey : ['users'],
+    })
+
     return this.http.delete<void>(`${environment.apiUrl}/users/${userid}`);
   }
 

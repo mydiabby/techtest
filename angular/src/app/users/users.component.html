@@ -8,8 +8,15 @@
 
 <div class="container">
 
+  @if (users().isLoading) {
+    <h4>Loading users ....</h4>
+  }
+  @if (users().isError) {
+    <h4 style="color: red">Error while loading users ....</h4>
+  }
 
-  <table mat-table [dataSource]="dataSource()" matSort (matSortChange)="sortData($event)" class="mat-elevation-z8">
+
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" class="mat-elevation-z8">
 
 
     <ng-container matColumnDef="id">
