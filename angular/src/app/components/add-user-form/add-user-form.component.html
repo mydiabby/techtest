@@ -1,0 +1,34 @@
+<div class="add-user-form-container">
+  <form class="user-form" [formGroup]="userForm" (submit)="submitUser()">
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label> {{ WORDING.firstName }} </mat-label>
+      <input matInput formControlName="firstName" required />
+    </mat-form-field>
+
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label> {{ WORDING.lastName }} </mat-label>
+      <input matInput formControlName="lastName" required />
+    </mat-form-field>
+
+    <div class="buttons-container">
+      <button
+        class="add-user-button"
+        mat-raised-button
+        color="primary"
+        type="submit"
+      >
+        {{ WORDING.addUserFormButtonLabel }}
+      </button>
+      <button
+        class="return-button"
+        routerLink="/users"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+        mat-raised-button
+        color="secondary"
+      >
+        {{ WORDING.returnButtonLabel }}
+      </button>
+    </div>
+  </form>
+</div>

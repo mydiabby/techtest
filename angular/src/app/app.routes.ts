@@ -21,5 +21,4 @@ export const routes: Routes = [
 // route /users  ->  utiliser un resolver pour fetch les users avant le chargement des composants
 // users comp + page + store + facade
 // users list comp
-// add user comp + page
 // add user form comp

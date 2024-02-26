@@ -1,0 +1,24 @@
+.add-user-form-container {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.user-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-user-button {
+  flex-grow: 1;
+}
+
+.return-button {
+  flex-grow : 1;
+  margin-left: 24px;
+}

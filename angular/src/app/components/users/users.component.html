@@ -1,10 +1,15 @@
-<p>users-comp works!</p>
-<button
-  routerLink="/users/add"
-  routerLinkActive="active"
-  ariaCurrentWhenActive="page"
-  mat-raised-button
-  color="primary"
->
-  Ajouter un utilisateur
-</button>
+<div class="users-container">
+  <div class="users-list-title-container">
+    <span class="users-list-title">{{ WORDING.usersListTitle }}</span>
+  </div>
+  <app-users-list [usersListData]="usersListData"></app-users-list>
+  <button
+    routerLink="/users/add"
+    routerLinkActive="active"
+    ariaCurrentWhenActive="page"
+    mat-raised-button
+    color="primary"
+  >
+    {{ WORDING.addUserButtonLabel }}
+  </button>
+</div>
