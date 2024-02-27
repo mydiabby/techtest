@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { userResolver } from './resolvers/user.resolver';
 
 export const routes: Routes = [
   {
@@ -7,6 +8,7 @@ export const routes: Routes = [
       import('./pages/users/users.component.page').then(
         (mod) => mod.UsersComponentPage
       ),
+    resolve: { allUsers$: userResolver },
   },
   {
     path: 'users/add',
@@ -17,8 +19,3 @@ export const routes: Routes = [
   },
   { path: '', redirectTo: '/users', pathMatch: 'full' },
 ];
-
-// route /users  ->  utiliser un resolver pour fetch les users avant le chargement des composants
-// users comp + page + store + facade
-// users list comp
-// add user form comp
