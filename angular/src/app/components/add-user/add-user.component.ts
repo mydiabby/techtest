@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AddUserFormComponent } from '../add-user-form/add-user-form.component';
 import { WORDING } from '../../../assets/wording';
+import { User } from '../../http/users.model';
 
 @Component({
   selector: 'app-add-user',
@@ -10,5 +11,10 @@ import { WORDING } from '../../../assets/wording';
   styleUrl: './add-user.component.css',
 })
 export class AddUserComponent {
+  @Output() userFormValue: EventEmitter<User> = new EventEmitter();
+
+  emitUserFormValue(userFormValue: User) {
+    this.userFormValue.emit(userFormValue);
+  }
   protected readonly WORDING = WORDING;
 }

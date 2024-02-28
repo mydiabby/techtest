@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,8 +9,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import {WORDING} from "../../../assets/wording";
-
+import { WORDING } from '../../../assets/wording';
+import { User } from '../../http/users.model';
 
 @Component({
   selector: 'app-add-user-form',
@@ -28,6 +28,7 @@ import {WORDING} from "../../../assets/wording";
   styleUrl: './add-user-form.component.css',
 })
 export class AddUserFormComponent {
+  @Output() userFormValue: EventEmitter<User> = new EventEmitter();
   userForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
@@ -37,12 +38,14 @@ export class AddUserFormComponent {
     });
   }
 
-  submitUser() {
+  submitUser(): void {
     if (this.userForm.valid) {
       console.log(this.userForm.value);
+      this.userFormValue.emit(this.userForm.value);
+    } else {
+      console.log('Pas possible');
     }
   }
 
   protected readonly WORDING = WORDING;
-
 }

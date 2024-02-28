@@ -14,7 +14,7 @@ export class CreateUser {
   ) {}
 
   async execute(createUserDto: CreateUserDto) {
-    if (this.userService.userExists(createUserDto)) {
+    if (await this.userService.findUser(createUserDto)) {
         throw new HttpException('Un utilisateur avec le même nom et prénom existe déjà.', 409);
     }
     return await this.userService.createUser(createUserDto);

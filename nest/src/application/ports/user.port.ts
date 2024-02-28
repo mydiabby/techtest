@@ -5,5 +5,5 @@ export const UserServiceKey = 'USER_PORT';
 export interface UserService {
   getUsers: () => Promise<User[]>;
   createUser: (createUserDto: CreateUserDto) => Promise<User>;
-  userExists: (createUserDto: CreateUserDto) => boolean;
+  findUser: (createUserDto: CreateUserDto) => Promise<User>;
 }

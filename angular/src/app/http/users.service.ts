@@ -35,12 +35,12 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   getAllUsers$(): Observable<User[]> {
-    // return this.http.get<User[]>(`${this.apiPath}`);
-
-    return of(this.usersListData);
+    return this.http.get<User[]>(`${this.apiPath}`);
   }
 
-  createUser(userInfos: User): Observable<any> {
-    return this.http.post<User>(`${this.apiPath}`, userInfos);
+  createUser(userCreateInfos: User): Observable<any> {
+    console.log(userCreateInfos);
+    
+    return this.http.post<User>(`${this.apiPath}`, userCreateInfos);
   }
 }

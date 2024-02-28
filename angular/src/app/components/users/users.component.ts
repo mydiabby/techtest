@@ -24,29 +24,5 @@ import { CommonModule } from '@angular/common';
 })
 export class UsersComponent {
   @Input() allUsers$?: Observable<User[]>;
-
-  usersListData = [
-    {
-      lastName: 'Billy',
-      firstName: 'Jackson',
-      id: 1,
-    },
-    {
-      lastName: 'Tony',
-      firstName: 'Hawk',
-      id: 2,
-    },
-    {
-      lastName: 'Michael',
-      firstName: 'Stewart',
-      id: 3,
-    },
-    {
-      lastName: 'Lauren',
-      firstName: 'Sparkson',
-      id: 4,
-    },
-  ];
-
   protected readonly WORDING = WORDING;
 }

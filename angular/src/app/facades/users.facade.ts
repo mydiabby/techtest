@@ -27,8 +27,8 @@ export class UsersFacade {
     );
   }
 
-  createUser(userInfos: User): Observable<void> {
-    return this.usersService.createUser(userInfos).pipe(
+  createUser(userCreateInfos: User): Observable<void> {
+    return this.usersService.createUser(userCreateInfos).pipe(
       // finalize(() => this.loaderService.setLoading(false)), // set loading
       map((res) => res as unknown as void)
     );

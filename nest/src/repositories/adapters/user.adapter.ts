@@ -22,18 +22,12 @@ export class UserAdapter implements UserService {
     return this.usersRepository.save(user);
   }
 
-  userExists(user: CreateUserDto): boolean {
-    const existingUser = this.usersRepository.findOne({
+  findUser(user: CreateUserDto): Promise<User> {
+    return this.usersRepository.findOne({
       where: {
         lastName: user.lastName,
         firstName: user.firstName,
       },
     });
-
-    if (existingUser) {
-      return true;
-    }
-
-    return false;
   }
 }
