@@ -1,14 +1,25 @@
-import { Controller, Get } from '@nestjs/common';
-import { GetFullNamesOfAllUsers } from 'src/application/use-cases/getFullNameOfAllUsers';
+import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
+import { CreateUser } from 'src/application/use-cases/createUser';
+import { GetAllUsers } from 'src/application/use-cases/getAllUsers';
+import { CreateUserDto } from 'src/dto/create-user.dto';
+import { UserDto } from 'src/dto/user.dto';
 
-@Controller()
+@Controller('users')
 export class UserController {
   constructor(
-    private useCase: GetFullNamesOfAllUsers
+    private getAllUsersUseCase: GetAllUsers,
+    private createUserUseCase: CreateUser,
   ) {}
 
-  @Get('/users')
-  async getFullNamesOfAllUsers(): Promise<string[]> {
-    return await this.useCase.execute();
+  @Get()
+  @HttpCode(200)
+  async getAllUsers(): Promise<UserDto[]> {
+    return await this.getAllUsersUseCase.execute();
+  }
+
+  @Post()
+  @HttpCode(200)
+  async createUser(@Body() createUserDto: CreateUserDto) {
+    return await this.createUserUseCase.execute(createUserDto);
   }
 }
