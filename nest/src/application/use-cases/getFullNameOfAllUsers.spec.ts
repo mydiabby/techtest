@@ -21,8 +21,18 @@ describe('GetFullNamesOfAllUsers', () => {
     it('should return an array of full names', async () => {
       // Arrange
       const mockUsers: User[] = [
-        { id: 1, firstName: 'John', lastName: 'Doe', getFullName: jest.fn(() => 'John Doe') },
-        { id: 2, firstName: 'Jane', lastName: 'Smith', getFullName: jest.fn(() => 'Jane Smith') },
+        {
+          id: 1,
+          firstName: 'John',
+          lastName: 'Doe',
+          getFullName: jest.fn(() => 'John Doe'),
+        },
+        {
+          id: 2,
+          firstName: 'Jane',
+          lastName: 'Smith',
+          getFullName: jest.fn(() => 'Jane Smith'),
+        },
       ];
       jest.spyOn(userService, 'getUsers').mockResolvedValueOnce(mockUsers);
 
@@ -43,8 +53,18 @@ describe('GetFullNamesOfAllUsers', () => {
     it('should return an array of full names', async () => {
       // Arrange
       const mockUsers: User[] = [
-        { id: 1, firstName: 'John', lastName: 'Doe', getFullName: jest.fn(() => 'John Doe') },
-        { id: 2, firstName: 'Jane', lastName: 'Smith', getFullName: jest.fn(() => 'Jane Smith') },
+        {
+          id: 1,
+          firstName: 'John',
+          lastName: 'Doe',
+          getFullName: jest.fn(() => 'John Doe'),
+        },
+        {
+          id: 2,
+          firstName: 'Jane',
+          lastName: 'Smith',
+          getFullName: jest.fn(() => 'Jane Smith'),
+        },
       ];
       jest.spyOn(userService, 'getUsers').mockResolvedValueOnce(mockUsers);
 
@@ -81,7 +101,12 @@ describe('GetFullNamesOfAllUsers', () => {
     it('should return a user by id', async () => {
       // Arrange
       const userId = 1;
-      const mockUser: User = { id: userId, firstName: 'John', lastName: 'Doe', getFullName: jest.fn() };
+      const mockUser: User = {
+        id: userId,
+        firstName: 'John',
+        lastName: 'Doe',
+        getFullName: jest.fn(),
+      };
       jest.spyOn(userService, 'getUser').mockResolvedValueOnce(mockUser);
 
       // Act
@@ -96,7 +121,12 @@ describe('GetFullNamesOfAllUsers', () => {
   describe('create', () => {
     it('should create a new user', async () => {
       // Arrange
-      const newUser: User = { id: 1, firstName: 'John', lastName: 'Doe', getFullName: jest.fn() };
+      const newUser: User = {
+        id: 1,
+        firstName: 'John',
+        lastName: 'Doe',
+        getFullName: jest.fn(),
+      };
       jest.spyOn(userService, 'addUser').mockResolvedValueOnce(newUser);
 
       // Act
@@ -112,7 +142,12 @@ describe('GetFullNamesOfAllUsers', () => {
     it('should update an existing user', async () => {
       // Arrange
       const userId = 1;
-      const updatedUser: User = { id: userId, firstName: 'John', lastName: 'Updated', getFullName: jest.fn() };
+      const updatedUser: User = {
+        id: userId,
+        firstName: 'John',
+        lastName: 'Updated',
+        getFullName: jest.fn(),
+      };
       jest.spyOn(userService, 'updateUser').mockResolvedValueOnce(updatedUser);
 
       // Act
@@ -137,5 +172,4 @@ describe('GetFullNamesOfAllUsers', () => {
       expect(userService.deleteUser).toHaveBeenCalledWith(userId);
     });
   });
-
 });

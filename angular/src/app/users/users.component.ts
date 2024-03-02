@@ -57,7 +57,7 @@ export class UsersComponent  {
           return 0;
       }
     });
-    this.dataSource = sortedData;
+    this.dataSource = [...sortedData];
 
   }
 
@@ -77,9 +77,7 @@ export class UsersComponent  {
   userDelete(userid: number) {
     console.log('user delete ', userid);
 
-    this.userService.delete(userid).subscribe(_ => {
-      console.log('deleted');
-    });
+    this.userService.delete(userid).mutate(undefined);
   }
 
 }

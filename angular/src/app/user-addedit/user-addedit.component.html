@@ -30,9 +30,17 @@
       </button>
       <button mat-flat-button color="secondary" routerLink="/users">
         Annuler
-    </button>
+      </button>
   </div>
+
 </form>
+
+<div class="row">
+  <button mat-flat-button color="primary" (click)="add100Users()">
+    Ajouter 100 utilisateurs
+  </button>
+</div>
+
 } @else {
   <div class="text-center m-5">
     <span class="spinner-border spinner-border-lg align-center"></span>

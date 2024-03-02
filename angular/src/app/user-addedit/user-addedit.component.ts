@@ -1,15 +1,14 @@
+import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UserService } from '../services/user.service';
-import { NgClass } from '@angular/common';
-import { User } from '@app/models/user';
-import { Observable } from 'rxjs';
 
-import {ErrorStateMatcher} from '@angular/material/core';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { User } from '@app/models/user';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -89,7 +88,7 @@ export class UserAddEditComponent implements OnInit {
 
         this.submitting = true;
         this.saveUser()
-            .subscribe(
+                .then(
                 () => {
                     // this.alertService.success('Utilisateur sauvegardé', { keepAfterRouteChange: true });
                     this.router.navigateByUrl('/users');
@@ -110,10 +109,15 @@ export class UserAddEditComponent implements OnInit {
             )
     }
 
-    private saveUser(): Observable<User |null> {
+    private saveUser(): Promise<User> {
         // create or update user based on id param
         return this.id
-            ? this.usersService.update(this.id, this.form.value)
-            : this.usersService.create(this.form.value);
+            ? this.usersService.update().mutateAsync({userid: this.id, user: this.form.value})
+            : this.usersService.create(this.form.value).mutateAsync(undefined);
+    }
+
+    add100Users() {
+
+      this.usersService.addFakeUsers();
     }
 }

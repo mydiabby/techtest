@@ -10,3 +10,10 @@ table {
 th.mat-sort-header-sorted {
   color: black;
 }
+
+tr.mat-mdc-row:nth-child(odd){
+  background-color: #edf3fc;
+}
+tr.mat-mdc-row:nth-child(even){
+  background-color:#ffffff;
+}
