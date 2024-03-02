@@ -24,12 +24,9 @@ describe('HeaderComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should contain one element', () => {
-        // const listItems = fixture.nativeElement.querySelectorAll('ul li');
-        // expect(listItems.length).toBe(1);
-
+    it('should contain two element', () => {
         const ulElement = fixture.nativeElement.querySelector('#menu-list');
         const listItems = ulElement.querySelectorAll('li');
-        expect(listItems.length).toBe(1);
+        expect(listItems.length).toBe(2);
     });
 });
