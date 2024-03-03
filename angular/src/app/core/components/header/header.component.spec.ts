@@ -27,6 +27,6 @@ describe('HeaderComponent', () => {
     it('should contain two element', () => {
         const ulElement = fixture.nativeElement.querySelector('#menu-list');
         const listItems = ulElement.querySelectorAll('li');
-        expect(listItems.length).toBe(2);
+        expect(listItems.length).toBe(3);
     });
 });

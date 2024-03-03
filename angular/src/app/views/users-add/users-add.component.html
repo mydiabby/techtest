@@ -1,0 +1,21 @@
+@if(!isLoading()){
+<mat-card>
+    <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
+        <mat-card-content>
+            <mat-form-field>
+                <mat-label>Prénom</mat-label>
+                <input matInput formControlName="firstname">
+                <mat-error>{{firstnameErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Nom</mat-label>
+                <input matInput formControlName="lastname">
+                <mat-error>{{lastnameErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!addUserForm.valid">Valider</button>
+        </mat-card-content>
+    </form>
+</mat-card>
+} @else {
+<mat-spinner></mat-spinner>
+}
