@@ -2,31 +2,20 @@ import { Module } from '@nestjs/common';
 import { HealthcheckController } from './controllers/healthcheck.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user.module';
-
-const {
-  DB_HOST,
-  DB_USER,
-  DB_PASS,
-  DB_NAME,
-} = process.env;
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmConfigService } from './database/typeorm-config.service';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: DB_HOST,
-      port: 5432,
-      username: DB_USER,
-      password: DB_PASS,
-      database: DB_NAME,
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
-    UserModule,
-  ],
-  controllers: [
-    HealthcheckController
-  ],
-  providers: [],
+    imports: [
+        ConfigModule.forRoot({ isGlobal: true }),
+        TypeOrmModule.forRootAsync({
+            useClass: TypeOrmConfigService,
+        }),
+        UserModule,
+    ],
+    controllers: [
+        HealthcheckController
+    ],
+    providers: [],
 })
-export class AppModule {}
+export class AppModule { }
