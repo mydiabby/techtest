@@ -34,8 +34,8 @@ export class UserListComponent {
     private userService = inject(UserService);
 
     columns: { code: string, text: string }[] = [
-        { code: 'firstname', text: 'Prénom' },
-        { code: 'lastname', text: 'Nom' }
+        { code: 'firstName', text: 'Prénom' },
+        { code: 'lastName', text: 'Nom' }
     ];
     users: Signal<User[] | undefined> = toSignal(this.userService.getAll());
 

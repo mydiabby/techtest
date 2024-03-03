@@ -33,13 +33,13 @@ export class UsersAddComponent {
     private snackBar = inject(MatSnackBar);
 
     addUserForm: FormGroup = this.formBuilder.nonNullable.group({
-        firstname: ['', [Validators.required]],
-        lastname: ['', [Validators.required]],
+        firstName: ['', [Validators.required]],
+        lastName: ['', [Validators.required]],
     });
 
     isLoading = signal(false);
-    firstnameErrorMessage = signal(this.addUserForm.get('firstname')?.hasError('required') ? 'You must enter a value' : '');
-    lastnameErrorMessage = signal(this.addUserForm.get('firstname')?.hasError('required') ? 'You must enter a value' : '');
+    firstNameErrorMessage = signal(this.addUserForm.get('firstName')?.hasError('required') ? 'You must enter a value' : '');
+    lastNameErrorMessage = signal(this.addUserForm.get('firstName')?.hasError('required') ? 'You must enter a value' : '');
 
     onSubmit() {
         this.isLoading.set(true);

@@ -10,11 +10,11 @@ import { CreateUserDto } from "../dto/create-user.dto";
 export class InMemoryUserService extends UserService {
 
     private users: User[] = [
-        { id: 1, firstname: 'William', lastname: 'Clint' },
-        { id: 2, firstname: 'John', lastname: 'Doe' },
-        { id: 3, firstname: 'Jean', lastname: 'Durand' },
-        { id: 4, firstname: 'Nicolas', lastname: 'Martin' },
-        { id: 5, firstname: 'Tom', lastname: 'Smith' }
+        { id: 1, firstName: 'William', lastName: 'Clint' },
+        { id: 2, firstName: 'John', lastName: 'Doe' },
+        { id: 3, firstName: 'Jean', lastName: 'Durand' },
+        { id: 4, firstName: 'Nicolas', lastName: 'Martin' },
+        { id: 5, firstName: 'Tom', lastName: 'Smith' }
     ];
 
     getAll(): Observable<User[]> {

@@ -12,7 +12,7 @@ describe('UsersAddComponent', () => {
     let addOneSpy: Observable<User>;
 
     beforeEach(async () => {
-        const user: User = { id: 54, firstname: 'fnTest', lastname: 'lnTest' };
+        const user: User = { id: 54, firstName: 'fnTest', lastName: 'lnTest' };
         const userServiceSpy = jasmine.createSpyObj('UserService', ['addOne']);
         addOneSpy = userServiceSpy.addOne.and.returnValue(of(user));
         await TestBed.configureTestingModule({

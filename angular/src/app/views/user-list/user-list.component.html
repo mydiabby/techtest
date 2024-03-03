@@ -2,7 +2,7 @@
     @defer(when (users())) {
     @if (users(); as users) {
     @if ((users).length > 0) {
-    <table mat-table [dataSource]="users | sort : 'firstname'" class="mat-elevation-z4">
+    <table mat-table [dataSource]="users | sort : 'firstName'" class="mat-elevation-z4">
         @for (column of columns ; track column) {
         <ng-container [matColumnDef]="column.code">
             <th mat-header-cell *matHeaderCellDef> {{column.text |titlecase}} </th>
