@@ -1,14 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AddUserComponentPage } from './add-user.component.page';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('AddUserComponent', () => {
+describe('AddUserComponentPage', () => {
   let component: AddUserComponentPage;
   let fixture: ComponentFixture<AddUserComponentPage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddUserComponentPage]
+      imports: [AddUserComponentPage, HttpClientTestingModule, RouterTestingModule, BrowserAnimationsModule]
     })
     .compileComponents();
     

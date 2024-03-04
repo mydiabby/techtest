@@ -14,14 +14,14 @@ import { User } from '../../http/users/users.model';
 })
 export class AddUserComponentPage implements OnDestroy {
   showErrorMessage: boolean;
-  subscriptions = new Subscription();
+  subscription = new Subscription();
 
   constructor(private usersFacade: UsersFacade, private router: Router) {
     this.showErrorMessage = false;
   }
 
   createUser(userCreateInfos: User) {
-    this.subscriptions.add(
+    this.subscription.add(
       this.usersFacade.createUser(userCreateInfos).subscribe({
         next: (u) => this.router.navigate(['/users']),
         error: (e) => {
@@ -35,6 +35,6 @@ export class AddUserComponentPage implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }

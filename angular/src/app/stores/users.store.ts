@@ -14,8 +14,6 @@ export class UsersStore {
   constructor() {}
 
   setAllUsers(allUsers: User[]): void {
-    console.log(allUsers);
-    
     this.allUsersSubject.next(allUsers);
   }
 }
