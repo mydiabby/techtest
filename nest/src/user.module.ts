@@ -7,6 +7,9 @@ import { UserAdapter } from "./repositories/adapters/user.adapter";
 import { UserSchema } from "./repositories/schemas/user.schema";
 import { AddUserUseCase } from "./application/use-cases/addUser.usercase";
 import { GetAllUsersUseCase } from "./application/use-cases/getAllUsers.usercase";
+import { UpdateUserUseCase } from "./application/use-cases/updateUser.usercase";
+import { DeleteUserUseCase } from "./application/use-cases/deleteUser.usercase";
+import { GetUserByIdUseCase } from "./application/use-cases/getUserById.usercase";
 
 @Module({
     imports: [
@@ -22,7 +25,10 @@ import { GetAllUsersUseCase } from "./application/use-cases/getAllUsers.usercase
         },
         GetFullNamesOfAllUsers,
         AddUserUseCase,
-        GetAllUsersUseCase
+        GetAllUsersUseCase,
+        GetUserByIdUseCase,
+        UpdateUserUseCase,
+        DeleteUserUseCase
     ],
 })
 export class UserModule { }

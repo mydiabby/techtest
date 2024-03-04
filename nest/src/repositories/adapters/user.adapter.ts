@@ -3,8 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserService } from 'src/application/ports/user.port';
 import { User } from 'src/domain/entities/user';
 import { UserSchema } from '../schemas/user.schema';
-import { Repository } from 'typeorm';
-import { CreateUserDto } from 'src/domain/dto/create-user.dto';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { CreateUserDto } from 'src/application/dto/create-user.dto';
+import { UpdateUserDto } from 'src/application/dto/update-user.dto';
 
 @Injectable()
 export class UserAdapter implements UserService {
@@ -17,8 +18,21 @@ export class UserAdapter implements UserService {
         return this.usersRepository.find();
     }
 
+    getUserById(id: number): Promise<User> {
+        return this.usersRepository.findOneBy({ id: `${id}` });
+    }
+
     addUser(user: CreateUserDto): Promise<User> {
         return this.usersRepository.save(user);
     }
+
+    updateUser(id: number, user: UpdateUserDto): Promise<UpdateResult> {
+        return this.usersRepository.update(id, user);
+    }
+
+    deleteUser(id: number): Promise<DeleteResult> {
+        return this.usersRepository.delete(id);
+    }
+
 
 }
