@@ -30,6 +30,10 @@ export class UserAdapter implements UserService {
         return this.usersRepository.findOneBy({ id: `${id}` });
     }
 
+    getUserByName(firstName: string, lastName: string): Promise<User> {
+        return this.usersRepository.findOneBy({ firstName, lastName });
+    }
+
     addUser(user: CreateUserDto): Promise<User> {
         return this.usersRepository.save(user);
     }
