@@ -1,4 +1,4 @@
-import { Injectable, Inject } from "@nestjs/common";
+import { Injectable, Inject, BadRequestException } from "@nestjs/common";
 import { UserService, UserServiceKey } from "../ports/user.port";
 import { User } from "src/domain/entities/user";
 
@@ -9,8 +9,9 @@ export class GetAllUsersUseCase {
         private userService: UserService
     ) { }
 
-    async execute(): Promise<User[]> {
-        return await this.userService.getUsers();
-
+    async execute(orderBy: string): Promise<User[]> {
+        if (!orderBy) return await this.userService.getUsers();
+        if (!['firstName', 'lastName'].includes(orderBy)) throw new BadRequestException('Invalid query string');
+        return await this.userService.getOrderedUsers(orderBy);
     }
 }

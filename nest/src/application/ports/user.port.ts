@@ -6,6 +6,7 @@ import { DeleteResult, UpdateResult } from "typeorm";
 export const UserServiceKey = 'USER_PORT';
 export interface UserService {
     getUsers: () => Promise<User[]>;
+    getOrderedUsers: (orderBy: string) => Promise<User[]>;
     getUserById: (id: number) => Promise<User>;
     addUser: (user: CreateUserDto) => Promise<User>;
     updateUser: (id: number, user: UpdateUserDto) => Promise<UpdateResult>;

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
 import { AddUserUseCase } from 'src/application/use-cases/addUser.usercase';
 import { GetAllUsersUseCase } from 'src/application/use-cases/getAllUsers.usercase';
 import { GetFullNamesOfAllUsers } from 'src/application/use-cases/getFullNameOfAllUsers';
@@ -28,8 +28,8 @@ export class UserController {
     }
 
     @Get()
-    async getAllUsers(): Promise<User[]> {
-        return await this.getAllUsersUseCase.execute();
+    async getAllUsers(@Query('orderBy') orderBy: string): Promise<User[]> {
+        return await this.getAllUsersUseCase.execute(orderBy);
     }
 
     @Get(':id')

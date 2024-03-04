@@ -18,6 +18,14 @@ export class UserAdapter implements UserService {
         return this.usersRepository.find();
     }
 
+    getOrderedUsers(orderBy: string): Promise<User[]> {
+        return this.usersRepository.find({
+            order: {
+                [orderBy]: 'ASC'
+            }
+        });
+    }
+
     getUserById(id: number): Promise<User> {
         return this.usersRepository.findOneBy({ id: `${id}` });
     }
