@@ -1,0 +1,14 @@
+.add-user-container {
+    margin-top: 100px;
+    margin-left: 30%;
+    margin-right: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .add-user-title {
+    font-size: large;
+    font-weight: bold;
+  }
+  

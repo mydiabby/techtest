@@ -1,0 +1,17 @@
+<div class="users-container">
+  <div class="users-list-title-container">
+    <span class="users-list-title">{{ WORDING.usersListTitle }}</span>
+  </div>
+  <ng-container *ngIf="allUsers$ | async as allUsers">
+    <app-users-list [usersList]="allUsers"></app-users-list>
+  </ng-container>
+  <button
+    routerLink="/users/add"
+    routerLinkActive="active"
+    ariaCurrentWhenActive="page"
+    mat-raised-button
+    color="primary"
+  >
+    {{ WORDING.addUserButtonLabel }}
+  </button>
+</div>

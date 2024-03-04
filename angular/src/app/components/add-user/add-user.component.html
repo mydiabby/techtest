@@ -1,0 +1,11 @@
+<div class="add-user-container">
+  <div class="add-user-title-container">
+    <span class="add-user-title">{{ WORDING.addUserTitle }}</span>
+  </div>
+  <app-add-user-form
+    (userFormValue)="emitUserFormValue($event)"
+  ></app-add-user-form>
+  @if (showErrorMessage) {
+  <app-add-user-error-message></app-add-user-error-message>
+  }
+</div>
