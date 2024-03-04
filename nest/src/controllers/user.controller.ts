@@ -9,7 +9,10 @@ import { DeleteResult, UpdateResult } from 'typeorm';
 import { UpdateUserDto } from 'src/application/dto/update-user.dto';
 import { DeleteUserUseCase } from 'src/application/use-cases/deleteUser.usercase';
 import { GetUserByIdUseCase } from 'src/application/use-cases/getUserById.usercase';
+import { ApiTags } from '@nestjs/swagger';
+import { GetUsersQueryStringDto } from 'src/application/dto/get-users-queryString.dto';
 
+@ApiTags("Users")
 @Controller('/public/users')
 export class UserController {
 
@@ -28,8 +31,8 @@ export class UserController {
     }
 
     @Get()
-    async getAllUsers(@Query('orderBy') orderBy: string): Promise<User[]> {
-        return await this.getAllUsersUseCase.execute(orderBy);
+    async getAllUsers(@Query() query?: GetUsersQueryStringDto): Promise<User[]> {
+        return await this.getAllUsersUseCase.execute(query.orderBy);
     }
 
     @Get(':id')

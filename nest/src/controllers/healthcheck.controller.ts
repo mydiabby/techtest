@@ -1,11 +1,13 @@
 import { Controller, Get } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags("healthcheck")
 @Controller()
 export class HealthcheckController {
-  constructor() {}
+    constructor() { }
 
-  @Get('/healthcheck')
-  healthcheck(): string {
-    return 'OK';
-  }
+    @Get('/healthcheck')
+    healthcheck(): string {
+        return 'OK';
+    }
 }
