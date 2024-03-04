@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { AddUserFormComponent } from '../add-user-form/add-user-form.component';
 import { WORDING } from '../../../assets/wording';
 import { User } from '../../http/users/users.model';
@@ -10,6 +16,7 @@ import { AddUserErrorMessageComponent } from '../add-user-error-message/add-user
   imports: [AddUserFormComponent, AddUserErrorMessageComponent],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddUserComponent {
   @Input() showErrorMessage: boolean;

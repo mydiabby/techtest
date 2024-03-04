@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { WORDING } from '../../../assets/wording';
 import { User } from '../../http/users/users.model';
@@ -9,6 +9,7 @@ import { User } from '../../http/users/users.model';
   imports: [MatTableModule],
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersListComponent {
   @Input() usersList: User[];
