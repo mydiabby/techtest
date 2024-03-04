@@ -16,6 +16,7 @@
         mat-raised-button
         color="primary"
         type="submit"
+        [disabled]="!userForm.valid"
       >
         {{ WORDING.addUserFormButtonLabel }}
       </button>

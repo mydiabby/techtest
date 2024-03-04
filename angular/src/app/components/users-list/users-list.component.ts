@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { Observable } from 'rxjs';
 import { WORDING } from '../../../assets/wording';
-import { User } from '../../http/users.model';
+import { User } from '../../http/users/users.model';
 
 @Component({
   selector: 'app-users-list',

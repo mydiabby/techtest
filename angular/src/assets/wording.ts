@@ -6,5 +6,6 @@ export const WORDING: any = {
     addUserButtonLabel: 'Ajouter un utilisateur',
     addUserFormButtonLabel: 'Ajouter',
     returnButtonLabel: 'Retour',
-    addUserTitle: "Ajout d'un utilisateur :"
+    addUserTitle: "Ajout d'un utilisateur :",
+    userAlreadyExistErrorMessage: 'Un utilisateur avec le même nom et prénom existe déjà.'
   }

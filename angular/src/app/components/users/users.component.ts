@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { UsersListComponent } from '../users-list/users-list.component';
 import {WORDING} from "../../../assets/wording";
 import { Observable } from 'rxjs';
-import { User } from '../../http/users.model';
+import { User } from '../../http/users/users.model';
 import { CommonModule } from '@angular/common';
 
 @Component({

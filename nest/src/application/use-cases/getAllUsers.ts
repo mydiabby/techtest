@@ -5,7 +5,6 @@ import { UserDto } from 'src/dto/user.dto';
 
 @Injectable()
 export class GetAllUsers {
-  // GetUsersOrderedAlphabetically
   constructor(
     @Inject(UserServiceKey)
     private userService: UserService,
@@ -13,8 +12,6 @@ export class GetAllUsers {
 
   async execute(): Promise<UserDto[]> {
     const users = await this.userService.getUsers();
-    console.log(users);
-
     const usersDto = users.map((user) => ({
       firstName: user.firstName,
       lastName: user.lastName,

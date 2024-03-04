@@ -10,7 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { WORDING } from '../../../assets/wording';
-import { User } from '../../http/users.model';
+import { User } from '../../http/users/users.model';
 
 @Component({
   selector: 'app-add-user-form',

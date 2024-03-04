@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UsersComponent } from '../../components/users/users.component';
 import { UsersFacade } from '../../facades/users.facade';
-import { User } from '../../http/users.model';
+import { User } from '../../http/users/users.model';
 
 @Component({
   selector: 'app-users-page',

@@ -1,1 +1,4 @@
-<app-add-user (userFormValue)="createUser($event)"></app-add-user>
+<app-add-user
+  (userFormValue)="createUser($event)"
+  [showErrorMessage]="showErrorMessage"
+></app-add-user>
