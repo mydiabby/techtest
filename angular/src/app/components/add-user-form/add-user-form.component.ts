@@ -40,10 +40,7 @@ export class AddUserFormComponent {
 
   submitUser(): void {
     if (this.userForm.valid) {
-      console.log(this.userForm.value);
       this.userFormValue.emit(this.userForm.value);
-    } else {
-      console.log('Pas possible');
     }
   }
 
