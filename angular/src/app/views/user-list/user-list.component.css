@@ -1,0 +1,9 @@
+.view {
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+}
+
+.view > * {
+  margin-top: 0.5em;
+}

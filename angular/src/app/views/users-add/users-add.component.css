@@ -1,0 +1,10 @@
+mat-card {
+  max-width: 30em;
+  padding: 1em;
+}
+
+mat-card-content{
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+}
