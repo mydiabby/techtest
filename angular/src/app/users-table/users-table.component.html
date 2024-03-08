@@ -1,0 +1,195 @@
+<div class="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
+    <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white rounded-none bg-clip-border">
+      <div class="flex items-center justify-between gap-8 mb-8">
+        <div>
+          <h5
+            class="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+            Users list
+          </h5>
+          <p class="block mt-1 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
+            See information about all users
+          </p>
+        </div>
+        <div class="flex flex-col gap-2 shrink-0 sm:flex-row">
+          <button
+            (click)="viewAll()"
+            [class.focus:bg-purple-900]="isViewAllActive"
+            [class.focus:text-white]="isViewAllActive"
+            [class.focus:border-white]="isViewAllActive"
+            class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            type="button">
+            view all
+          </button>
+          <button
+            [routerLink]="['/users/add']"
+            class="flex select-none items-center gap-3 rounded-lg bg-purple-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+              stroke-width="2" class="w-4 h-4">
+              <path
+                d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z">
+              </path>
+            </svg>
+            Add user
+          </button>
+        </div>
+      </div>
+    <div class="p-6 px-0 overflow-scroll">
+      <table class="w-full mt-4 text-left table-auto min-w-max">
+        <thead>
+          <tr>
+            <th
+              class="p-4 transition-colors border-y border-blue-gray-100 bg-blue-gray-50/50 hover:bg-blue-gray-50 flex justify-between">
+              <p
+                class="flex items-center justify-between gap-2 font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                User
+              </p>
+              <button
+                (click)="resetSorting()"
+                class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                type="button">
+                Reset Sorting
+              </button>
+            </th>
+            @for(tablehead of desiredTableHeadersOrder; track tablehead.column){
+            <th
+              (click)="toggleSort(tablehead.column)"
+              class="p-4 transition-colors cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 hover:bg-blue-gray-50">
+                <p
+                  class="flex items-center justify-between gap-2 font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                  {{ tablehead.column | titlecase }}
+                  @if (tablehead.toSort === 'ASC') {
+                    <i class="pi pi-sort-alpha-down" style="font-size: 0.75rem"></i>
+                  } @else if (tablehead.toSort === 'DESC') {
+                    <i class="pi pi-sort-alpha-up" style="font-size: 0.75rem"></i>
+                  } @else {
+                    <i class="pi pi-sort-alt" style="font-size: 0.75rem"></i>
+                  }
+                </p>
+              </th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of users; track user.id){
+            <tr>
+              <td class="p-4 border-b border-blue-gray-50">
+                <div class="flex items-center gap-3">
+                  <img src="assets/hidepainclose.png"
+                    alt="John Michael" class="relative inline-block h-9 w-9 !rounded-full object-cover object-center" />
+                  <div class="flex flex-col">
+                    <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                      {{ user.firstName + ' ' + user.lastName | titlecase }}
+                    </p>
+                    <p
+                      class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 opacity-70">
+                      {{ user.firstName + '.' + user.lastName }}&#64;hidepain.com
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td class="p-4 border-b border-blue-gray-50">
+                <div class="flex flex-col">
+                  <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                    {{ user.firstName  | titlecase }}
+                  </p>
+                </div>
+              </td>
+              <td class="p-4 border-b border-blue-gray-50">
+                <div class="flex flex-col">
+                  <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                    {{ user.lastName  | uppercase }}
+                  </p>
+                </div>
+              </td>
+              <td class="p-4 border-b border-blue-gray-50">
+                <div class="flex justify-center">
+                  <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                    {{ user.id }}
+                </p>
+                </div>
+              </td>
+              <td class="p-4 border-b border-blue-gray-50">
+                <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                  {{ user.createdAt | date: 'dd/MM/YYYY hh:mm zzz' }}
+                </p>
+              </td>
+              <td class="p-4 border-b border-blue-gray-50">
+                <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                  {{ user.updatedAt | date: 'dd/MM/YYYY hh:mm  zzz' }}
+                </p>
+              </td>
+              <td class="p-4 border-b border-blue-gray-50">
+                <button
+                  (click)="toggleEditionPopup(user)"
+                  class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  type="button">
+                  <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                      class="w-4 h-4">
+                      <path
+                        d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z">
+                      </path>
+                    </svg>
+                  </span>
+                </button>
+                <button
+                  (click)="toggleDeletionPopup(user)"
+                  class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  type="button">
+                  <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"fill="currentColor" aria-hidden="true"
+                          class="w-4 h-4">
+                          <path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/>
+                      </svg>
+                  </span>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="flex items-center justify-between p-4 border-t border-blue-gray-50">
+      <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+        Page {{ currentPage$ | async }} of {{ totalPage }}
+      </p>
+      <div class="flex gap-2">
+
+      </div>
+      <div class="flex gap-2">
+        <button
+          (click)="goToPage(currentPage$.value - 1)"
+          [disabled]="currentPage$.value === 1"
+          class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          type="button">
+          Previous
+        </button>
+        <button
+          (click)="goToPage(currentPage$.value + 1)"
+          [disabled]="currentPage$.value === totalPage"
+          class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          type="button">
+          Next
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <app-edition-popup
+    [user]="selectedUser"
+    [(display)]="displayEditionPopup"
+    header="Edit the User"
+    (confirm)="onConfirmEdit($event)"
+  />
+  
+  <app-edition-popup
+    [isDeletePopup]="true"
+    [user]="selectedUser"
+    [(display)]="displayDeletionPopup"
+    header="Delete the User"
+    (confirm)="onConfirmDelete($event)"
+  />
+
+  <p-toast position="bottom-center" key="bc"></p-toast>

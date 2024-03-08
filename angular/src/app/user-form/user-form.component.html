@@ -1,0 +1,46 @@
+<p-fieldset [formGroupName]="controlKey" [legend]="label">
+    <div class="card flex flex-col justify-content-center">
+        <div class="flex flex-col" style="padding-top: 1em; padding-bottom: 1.5em;">
+            <label for="firstName">First Name</label>
+            <input [class]="{ 'ng-invalid ng-dirty': formControl['firstName'].errors }" pInputText id="firstName" aria-describedby="firstname-help" formControlName="firstName" />
+            <small id="firstname-help">Enter a firstname to save.</small>
+            @if (formControl['firstName'].errors) {
+                <div class="" style="color: red" >
+                  @if (formControl['firstName'].errors['required']) {
+                  <div>firstName is required</div>
+                  }
+                  @if (formControl['firstName'].errors['minlength']) {
+                  <div>firstName must be at least 2 characters</div>
+                  }
+                  @if (formControl['firstName'].errors['maxlength']) {
+                  <div>firstName must not exceed 50 characters</div>
+                  }
+                  @if (formControl['firstName'].errors['pattern']) {
+                  <div>You shouldn't use special characters (except dash, apostroph and space) or uncommon patterns</div>
+                  }
+                </div>
+            }
+        </div>
+        <div class="flex flex-col">
+            <label for="lastName">Last Name</label>
+            <input [class]="{ 'ng-invalid ng-dirty': formControl['lastName'].errors }" pInputText id="lastName" aria-describedby="lastname-help" formControlName="lastName" />
+            <small id="lastname-help">Enter a lastname to save.</small>
+            @if (formControl['lastName'].errors) {
+                <div class="" style="color: red" >
+                  @if (formControl['lastName'].errors['required']) {
+                  <div>lastName is required</div>
+                  }
+                  @if (formControl['lastName'].errors['minlength']) {
+                  <div>lastName must be at least 2 characters</div>
+                  }
+                  @if (formControl['lastName'].errors['maxlength']) {
+                  <div>lastName must not exceed 50 characters</div>
+                  }
+                  @if (formControl['lastName'].errors['pattern']) {
+                  <div>You shouldn't use special characters (except dash, apostroph and space) or uncommon patterns</div>
+                  }
+                </div>
+            }
+        </div>
+    </div>
+</p-fieldset>

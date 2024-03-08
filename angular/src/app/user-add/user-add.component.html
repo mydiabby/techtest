@@ -1,0 +1,13 @@
+
+<div>
+  <button [routerLink]="['']" type="button" pButton icon="pi pi-home"  label="Go Back Home"></button>
+  <div class="flex flex-col justify-center items-center">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" style="padding-top: 2.5em; padding-bottom: 1.5em;">
+      <app-user-form controlKey="username" label="Username"/>
+      <div style="padding-top: 1.5em; padding-bottom: 1.5em;">
+        <p-button [disabled]="form.invalid" icon="pi pi-save" label="Create User" type="submit"></p-button>
+      </div>
+    </form>
+  </div>
+  <p-toast position="bottom-center" key="bc"></p-toast>
+</div>

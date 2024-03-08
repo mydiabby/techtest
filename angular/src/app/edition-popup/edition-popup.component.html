@@ -1,0 +1,20 @@
+<p-dialog 
+    [header]="header"
+    [(visible)]="display"
+    [modal]="true"
+    (onShow)="onDisplay()"
+>
+    <div class="col-span-1">
+        @if (!isDeletePopup){
+            <form [formGroup]="form" (ngSubmit)="onConfirm()">
+                <app-user-form controlKey="username" label="Username"/>
+            </form>
+        } @else {
+            Do you want to irreversibly delete this user ?
+        }
+    </div>
+    <p-footer>
+        <button [disabled]="form.invalid" type="button" pButton icon="pi pi-check" (click)="onConfirm()" label="Confirm"></button>
+        <button type="button" pButton icon="pi pi-times" (click)="onCancel()" label="Cancel"></button>
+    </p-footer>
+</p-dialog>
