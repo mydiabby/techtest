@@ -1,0 +1,16 @@
+@use '../styles/theming' as t;
+
+// Fonts variables
+$primary-font: 'Roboto, "Helvetica Neue", sans-serif';
+
+// Breakpoints
+$xs: 400px;
+$s: 760px;
+$m: 980px;
+$l: 1200px;
+$xl: 1440px;
+
+// Transitions
+$speed: 250ms;
+$normal-speed: 350ms;
+$slow: 650ms;

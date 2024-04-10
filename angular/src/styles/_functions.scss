@@ -1,0 +1,33 @@
+/* ----------------------------- */
+/* ----------------------------- */
+/* -----     Functions     ----- */
+/* ----------------------------- */
+/* ----------------------------- */
+
+@use 'theme/colors';
+
+@function list($map, $keys...) {
+	@each $key in $keys {
+		$map: map-get($map, $key);
+	}
+	@return $map;
+}
+
+@function create_color_map($color, $tones) {
+	$map-tone: ();
+	$map-500: (
+		500: hsl(map-get($color, h), map-get($color, s), map-get($color, l)),
+	);
+
+	@each $key, $value in $tones {
+		$map: ();
+		$map: map-merge(
+			$map,
+			(
+				$key: hsl(map-get($color, h), map-get($color, s), $value),
+			)
+		);
+		$map-tone: map-merge($map-tone, $map);
+	}
+	@return map-merge($map-500, $map-tone);
+}

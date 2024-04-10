@@ -1,0 +1,58 @@
+/* ----------------------------- */
+/* ----------------------------- */
+/* ------     Theming    ------- */
+/* ----------------------------- */
+/* ----------------------------- */
+@use 'theme/colors';
+@use 'functions' as f;
+
+// THEME
+@forward 'theme/colors';
+@forward 'theme/fonts';
+
+
+$palettes: (
+);
+$states: (
+);
+$neutrals: (
+);
+
+@each $key, $value in colors.$palette {
+	$map: (
+	);
+$map: map-merge($map,
+		($key: f.create_color_map($value, colors.$color_tones),
+		));
+$palettes: map-merge($palettes, $map);
+}
+
+@each $key, $value in colors.$states {
+	$map: (
+	);
+$map: map-merge($map,
+		($key: f.create_color_map($value, colors.$state_tones),
+		));
+$states: map-merge($states, $map);
+}
+
+@each $key, $value in colors.$neutrals {
+	$map: (
+	);
+$map: map-merge($map,
+		($key: f.create_color_map($value, colors.$neutral_tones),
+		));
+$neutrals: map-merge($neutrals, $map);
+}
+
+@function color($color: 'primary', $tone: '500') {
+	@return map-get(map-get($palettes, $color), $tone);
+}
+
+@function state($state: 'success', $tone: '500') {
+	@return map-get(map-get($states, $state), $tone);
+}
+
+@function neutral($neutral: 'neutral', $tone: '500') {
+	@return map-get(map-get($neutrals, $neutral), $tone);
+}
