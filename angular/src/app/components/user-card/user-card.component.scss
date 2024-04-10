@@ -1,0 +1,29 @@
+@use '../../../styles' as s;
+
+.user-card {
+    background: #FFF;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px s.color(primary, 500);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 200px;
+
+    .uc-image img {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
+
+    .uc-info {
+        text-align: center;
+
+        .uci-name {
+            margin: 10px 0 5px;
+            font-size: 18px;
+            color: s.neutral(neutral, 500);
+        }
+    }
+}

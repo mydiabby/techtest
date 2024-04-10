@@ -1,1 +1,14 @@
-<p>users-list works!</p>
+<div class="users-list">
+    <div class="ul-top">
+        <h2>Liste des utilisateurs</h2>
+        <button routerLink="['/users/add']">Add User</button>
+    </div>
+
+    <div class="ul-container">
+        @for (user of users; track user.id) {
+        <app-user-card [user]="user"></app-user-card>
+        } @empty {
+        <span>Il n'y a aucun utilisateurs</span>
+        }
+    </div>
+</div>

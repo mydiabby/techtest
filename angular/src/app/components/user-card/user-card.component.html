@@ -1,0 +1,10 @@
+@if (user) {
+<div class="user-card">
+    <div class="uc-image">
+        <img src="https://i.pravatar.cc/300" alt="{{ user.firstname }} {{ user.lastname }} profile picture">
+    </div>
+    <div class="uc-info">
+        <h2 class="user-name">{{ user.firstname }} {{ user.lastname }}</h2>
+    </div>
+</div>
+}

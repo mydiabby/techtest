@@ -19,5 +19,11 @@ body {
     height: 100%;
     width: 100%;
 
-    background-color: t.color(primary, 500);
+    background-color: #FFF;
+}
+
+h1,
+h2,
+h3 {
+    color: t.color(primary, 500);
 }
