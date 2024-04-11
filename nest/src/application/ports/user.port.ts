@@ -1,5 +1,5 @@
-import { CreateUserDTO } from "src/domain/dto/create-user";
-import { User } from "src/domain/entities/user";
+import { CreateUserDTO } from "@dto/create-user";
+import { User } from "@entities/user";
 
 export const UserServiceKey = 'USER_PORT';
 export interface UserService {

@@ -1,10 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserService } from 'src/application/ports/user.port';
-import { User } from 'src/domain/entities/user';
-import { UserSchema } from '../schemas/user.schema';
+import { UserService } from '@ports/user.port';
+import { User } from '@entities/user';
+import { UserSchema } from '@schemas/user.schema';
 import { Repository } from 'typeorm';
-import { CreateUserDTO } from 'src/domain/dto/create-user';
+import { CreateUserDTO } from '@dto/create-user';
 
 @Injectable()
 export class UserAdapter implements UserService {
