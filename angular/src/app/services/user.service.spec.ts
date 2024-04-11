@@ -27,7 +27,7 @@ describe('UserService', () => {
     service.getAllUsers().subscribe(users => {
       expect(users).toBeTruthy();
       expect(users.length).toBe(4);
-      expect(users).toEqual(['Maya Ha', 'Maya Haha', 'Maya Hi', 'Maya Hou']); // Vérifie l'ordre croissant
+      expect(users).toEqual(['Maya Ha', 'Maya Haha', 'Maya Hi', 'Maya Hou']);
     });
 
     const req = httpTestingController.expectOne(`${environment.apiURL}/users`);
