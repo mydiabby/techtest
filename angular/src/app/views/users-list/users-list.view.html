@@ -4,11 +4,20 @@
         <button routerLink="/users/add">Add User</button>
     </div>
 
+    @if (!isLoading) {
     <div class="ul-container">
         @for (user of users; track user.id) {
         <app-user-card [user]="user"></app-user-card>
         } @empty {
-        <span>Il n'y a aucun utilisateurs</span>
+        <span>Il n'y a aucun utilisateur</span>
         }
     </div>
+    }
+    @else {
+    <div class="lds-ripple">
+        <div></div>
+        <div></div>
+    </div>
+    }
+
 </div>

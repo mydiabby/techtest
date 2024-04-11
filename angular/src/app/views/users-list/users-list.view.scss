@@ -1,6 +1,10 @@
 @use '../../../styles' as s;
 
 .users-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
@@ -9,6 +13,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        width: 100%;
 
         h2 {
             font-size: 2rem;

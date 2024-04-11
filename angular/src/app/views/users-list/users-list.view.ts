@@ -3,6 +3,7 @@ import { User } from '../../interfaces/user';
 import { UpperCasePipe } from '@angular/common';
 import { UserCardComponent } from '../../components/user-card/user-card.component';
 import { RouterLink } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-users-list',
@@ -12,10 +13,26 @@ import { RouterLink } from '@angular/router';
   styleUrl: './users-list.view.scss'
 })
 export class UsersListView {
-  users: User[] = [
-    { id: 1, lastname: 'Hi', firstname: 'Maya' },
-    { id: 2, lastname: 'Hou', firstname: 'Maya' },
-    { id: 2, lastname: 'Ha', firstname: 'Maya' },
-    { id: 4, lastname: 'Haha', firstname: 'Maya' },
-  ];
+
+  constructor(private userService: UserService) {
+
+  }
+  users: User[] = [];
+  isLoading: boolean = true;
+
+  ngOnInit() {
+    this.userService.getAllUsers().subscribe(
+      {
+        next: (data) => {
+          this.users = data;
+        },
+        error: (error) => {
+          console.error('There was an error!', error);
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      }
+    );
+  }
 }
