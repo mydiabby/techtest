@@ -16,14 +16,14 @@ import { UserDTO } from '../../interfaces/user-dto';
 export class UsersAddView {
   userAddForm: FormGroup;
   userDTO: UserDTO = {
-    firstname: '',
-    lastname: ''
+    firstName: '',
+    lastName: ''
   }
 
   constructor(private formBuilder: FormBuilder) {
     this.userAddForm = this.formBuilder.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
     });
   }
 
@@ -34,12 +34,12 @@ export class UsersAddView {
     console.log(this.userAddForm.value);
   }
 
-  get firstname() {
-    return this.userAddForm.get('firstname');
+  get firstName() {
+    return this.userAddForm.get('firstName');
   }
 
-  get lastname() {
-    return this.userAddForm.get('lastname');
+  get lastName() {
+    return this.userAddForm.get('lastName');
   }
 
 }

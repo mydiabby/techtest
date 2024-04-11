@@ -8,12 +8,12 @@
     <form [formGroup]="userAddForm" class="uad-container" (ngSubmit)="onSubmit()">
         <div class="uadc-group">
             <div class="uadcg-item">
-                <label for="firstname">First Name:</label>
-                <input type="text" id="firstname" formControlName="firstname" required>
-                @if (firstname?.invalid && (firstname?.dirty ||
-                firstname?.touched)) {
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" formControlName="firstName" required>
+                @if (firstName?.invalid && (firstName?.dirty ||
+                firstName?.touched)) {
                 <div class="alert">
-                    @if (firstname?.errors?.['required']) {
+                    @if (firstName?.errors?.['required']) {
                     <span>First Name is required.</span>
                     }
                 </div>
@@ -21,11 +21,11 @@
             </div>
 
             <div class="uadcg-item">
-                <label for="lastname">Last Name:</label>
-                <input type="text" id="lastname" formControlName="lastname" required>
-                @if (lastname?.invalid && (lastname?.dirty || lastname?.touched)) {
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" formControlName="lastName" required>
+                @if (lastName?.invalid && (lastName?.dirty || lastName?.touched)) {
                 <div class="alert">
-                    @if (lastname?.errors?.['required']) {
+                    @if (lastName?.errors?.['required']) {
                     <span>Last Name is required.</span>
                     }
                 </div>
