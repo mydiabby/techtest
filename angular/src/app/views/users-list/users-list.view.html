@@ -6,7 +6,7 @@
 
     @if (!isLoading) {
     <div class="ul-container">
-        @for (user of users; track user.id) {
+        @for (user of users; track user) {
         <app-user-card [user]="user"></app-user-card>
         } @empty {
         <span>Il n'y a aucun utilisateur</span>

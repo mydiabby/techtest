@@ -17,7 +17,7 @@ export class UsersListView {
   constructor(private userService: UserService) {
 
   }
-  users: User[] = [];
+  users: string[] = [];
   isLoading: boolean = true;
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class UsersListView {
           this.users = data;
         },
         error: (error) => {
-          console.error('There was an error!', error);
+          console.error('An error has occured: ', error);
         },
         complete: () => {
           this.isLoading = false;
