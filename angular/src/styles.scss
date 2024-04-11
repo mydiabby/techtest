@@ -27,3 +27,41 @@ h2,
 h3 {
     color: t.color(primary, 500);
 }
+
+button {
+    padding: 10px 20px;
+    background-color: t.color(accent, 500);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: t.color(accent, 400);
+    }
+
+    &:disabled {
+        background-color: t.neutral(neutral, 500);
+        cursor: default;
+    }
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid t.neutral(neutral, 300);
+    border-radius: 4px;
+}
+
+.alert {
+    color: t.state(danger, 500);
+    background-color: t.state(danger, 100);
+    border-color: t.state(danger, 100);
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 5px;
+}

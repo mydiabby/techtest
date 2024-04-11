@@ -15,23 +15,6 @@
             font-weight: 800;
             margin-bottom: 0;
         }
-
-        button {
-            padding: 10px 20px;
-            background-color: s.color(accent, 500);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            text-transform: uppercase;
-            cursor: pointer;
-            outline: none;
-            transition: background-color 0.3s;
-
-            &:hover {
-                background-color: s.color(accent, 400);
-            }
-        }
     }
 
 

@@ -1,1 +1,39 @@
-<p>users-add works!</p>
+<div class="user-add-form">
+    <div class="uad-top">
+        <h2>Ajouter un utilisateur</h2>
+        <button routerLink="/users">
+            &larr; Return</button>
+    </div>
+
+    <form [formGroup]="userAddForm" class="uad-container" (ngSubmit)="onSubmit()">
+        <div class="uadc-group">
+            <div class="uadcg-item">
+                <label for="firstname">First Name:</label>
+                <input type="text" id="firstname" formControlName="firstname" required>
+                @if (firstname?.invalid && (firstname?.dirty ||
+                firstname?.touched)) {
+                <div class="alert">
+                    @if (firstname?.errors?.['required']) {
+                    <span>First Name is required.</span>
+                    }
+                </div>
+                }
+            </div>
+
+            <div class="uadcg-item">
+                <label for="lastname">Last Name:</label>
+                <input type="text" id="lastname" formControlName="lastname" required>
+                @if (lastname?.invalid && (lastname?.dirty || lastname?.touched)) {
+                <div class="alert">
+                    @if (lastname?.errors?.['required']) {
+                    <span>Last Name is required.</span>
+                    }
+                </div>
+                }
+            </div>
+
+        </div>
+        <button type="submit" [disabled]="userAddForm.invalid">Submit</button>
+    </form>
+
+</div>
