@@ -33,7 +33,7 @@
             </div>
 
         </div>
-        <button type="submit" [disabled]="userAddForm.invalid">Submit</button>
+        <button type="submit" [disabled]="userAddForm.invalid || isLoading">Submit</button>
     </form>
 
 </div>

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { User } from '../../interfaces/user';
 import { UpperCasePipe } from '@angular/common';
 import { UserCardComponent } from '../../components/user-card/user-card.component';
-import { RouterLink } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreateUserDTO } from '../../interfaces/create-user-dto';
 import { UserService } from '../../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-users-add',
@@ -17,10 +17,13 @@ import { UserService } from '../../services/user.service';
 export class UsersAddView {
   userAddForm: FormGroup;
   createUserDTO: CreateUserDTO;
+  isLoading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private toastr: ToastrService,
+    private router: Router
   ) {
     this.userAddForm = this.formBuilder.group({
       firstName: ["", Validators.required],
@@ -33,21 +36,30 @@ export class UsersAddView {
     }
   }
 
-  ngOnInit(): void {
-  }
-
   onSubmit() {
+    this.isLoading = true;
     this.createUserDTO = this.userAddForm.value;
     this.userService.addUser(this.createUserDTO).subscribe(
       {
         next: (data) => {
           console.log(data);
+          this.toastr.success('User successfully created !');
+          this.userAddForm.reset();
+          this.router.navigate(['/users']);
         },
         error: (error) => {
-          console.error('An error has occured: ', error);
+          switch (error.status) {
+            case 400:
+              this.toastr.error('User already exist');
+              break;
+            default:
+              this.toastr.error('An error has occured');
+              break;
+          }
+          this.isLoading = false;
         },
         complete: () => {
-          console.log("fini")
+          this.isLoading = false;
         }
       }
     );

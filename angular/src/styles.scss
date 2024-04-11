@@ -10,6 +10,11 @@
 @forward './styles/variables';
 @forward './styles/mixins';
 
+// Toastr style
+// regular style toast
+@import 'ngx-toastr/toastr';
+
+
 html,
 body {
     box-sizing: border-box;
