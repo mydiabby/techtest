@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
-import { UserCardComponent } from '../../components/user-card/user-card.component';
+import { UserCardComponent } from '@components/user-card/user-card.component';
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CreateUserDTO } from '../../interfaces/create-user-dto';
-import { UserService } from '../../services/user.service';
+import { CreateUserDTO } from '@interfaces/create-user-dto';
+import { UserService } from '@services/user.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -41,11 +41,13 @@ export class UsersAddView {
     this.createUserDTO = this.userAddForm.value;
     this.userService.addUser(this.createUserDTO).subscribe(
       {
-        next: (data) => {
-          console.log(data);
+        next: () => {
           this.toastr.success('User successfully created !');
           this.userAddForm.reset();
-          this.router.navigate(['/users']);
+          setTimeout(() => {
+            this.router.navigate(['/users']);
+          },
+            3000);
         },
         error: (error) => {
           switch (error.status) {

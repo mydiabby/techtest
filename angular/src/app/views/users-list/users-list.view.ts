@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { User } from '../../interfaces/user';
 import { UpperCasePipe } from '@angular/common';
-import { UserCardComponent } from '../../components/user-card/user-card.component';
+import { UserCardComponent } from '@components/user-card/user-card.component';
 import { RouterLink } from '@angular/router';
-import { UserService } from '../../services/user.service';
+import { UserService } from '@services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-users-list',
@@ -14,7 +14,10 @@ import { UserService } from '../../services/user.service';
 })
 export class UsersListView {
 
-  constructor(private userService: UserService) {
+  constructor(
+    private userService: UserService,
+    private toastr: ToastrService
+  ) {
 
   }
   users: string[] = [];
@@ -27,6 +30,7 @@ export class UsersListView {
           this.users = data;
         },
         error: (error) => {
+          this.toastr.error('An error has occured while retrieving users');
           console.error('An error has occured: ', error);
         },
         complete: () => {
