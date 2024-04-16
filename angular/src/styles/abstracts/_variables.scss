@@ -1,0 +1,17 @@
+$text-font-stack: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
+
+$text-color: hsl(0, 0%, 13%) !default;
+$brand-color: hsl(339, 100%, 45%) !default;
+$light-grey: hsl(0, 0%, 93%) !default;
+$mid-grey: hsl(0, 0%, 60%) !default;
+$dark-grey: hsl(0, 0%, 27%) !default;
+
+$container-max-width: 1180px !default;
+
+$breakpoints: (
+  'small': 320px,
+  'medium': 768px,
+  'large': 1024px,
+) !default;
+
+$base-url: '/assets/' !default;
