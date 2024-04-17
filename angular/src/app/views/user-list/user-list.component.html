@@ -1,0 +1,9 @@
+<button routerLink="add">Add a user</button>
+
+<div class="list">
+  @for (user of users(); track user) {
+    <div class="user">{{ user }}</div>
+  } @empty {
+    <div class="empty">It's empty 😥</div>
+  }
+</div>

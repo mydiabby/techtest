@@ -1,0 +1,14 @@
+@use '../../../styles/abstracts' as *;
+
+:host {
+  @extend %max-height;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.list {
+  max-height: calc(100vh - 20px - 4em);
+  overflow: auto;
+}

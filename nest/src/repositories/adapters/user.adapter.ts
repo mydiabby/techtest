@@ -10,9 +10,9 @@ export class UserAdapter implements UserService {
   constructor(
     @InjectRepository(UserSchema)
     private usersRepository: Repository<User>,
-  ) {}
+  ) { }
 
   getUsers(): Promise<User[]> {
-    return this.usersRepository.find();
+    return this.usersRepository.find({ order: { lastName: 'ASC' } });
   }
 }

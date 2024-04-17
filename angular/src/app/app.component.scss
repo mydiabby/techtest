@@ -1,0 +1,5 @@
+@use '../styles/abstracts' as *;
+
+:host {
+  @extend %max-height;
+}
