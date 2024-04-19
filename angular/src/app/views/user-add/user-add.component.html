@@ -1,0 +1,29 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form">
+  <div class="first-name">
+    <label for="firstName">First Name:</label>
+    <input id="firstName" type="text" formControlName="firstName" required (change)="resetBooleanErrors()" [className]="fullNameAlreadyUsed ? 'ng-invalid' : ''">
+    <div class="error-container">
+      @if (firstName.touched && (firstName.hasError('required') || emptyInputs.firstName)) {
+        <span>
+          First Name is required
+        </span>
+      }
+    </div>
+  </div>
+  <div class="last-name">
+    <label for="lastName">Last Name:</label>
+    <input id="lastName" type="text" formControlName="lastName" required (change)="resetBooleanErrors()" [className]="fullNameAlreadyUsed ? 'ng-invalid' : ''">
+    <div class="error-container">
+      @if (lastName.touched) {
+        <span>
+          @if (lastName.hasError('required') || emptyInputs.lastName) {
+            Last Name is required
+          } @else if (fullNameAlreadyUsed) {
+            Full Name already used
+          }
+        </span>
+      }
+    </div>
+  </div>
+  <button type="submit" [disabled]="!userForm.valid || isLoading" class="button">Add</button>
+</form>

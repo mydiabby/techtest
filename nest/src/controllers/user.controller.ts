@@ -1,14 +1,23 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { GetFullNamesOfAllUsers } from 'src/application/use-cases/getFullNameOfAllUsers';
+import { PostUser } from 'src/application/use-cases/postUser';
+import { PostUserDto } from 'src/domain/dto/post-user.dto';
+import { User } from 'src/domain/entities/user';
 
-@Controller()
+@Controller('users')
 export class UserController {
   constructor(
-    private useCase: GetFullNamesOfAllUsers
-  ) {}
+    private useCaseGetUsers: GetFullNamesOfAllUsers,
+    private useCasePostUser: PostUser,
+  ) { }
 
-  @Get('/users')
+  @Get('')
   async getFullNamesOfAllUsers(): Promise<string[]> {
-    return await this.useCase.execute();
+    return await this.useCaseGetUsers.execute();
+  }
+
+  @Post('')
+  async postUser(@Body() postUserDto: PostUserDto): Promise<User> {
+    return await this.useCasePostUser.execute(postUserDto);
   }
 }

@@ -1,10 +1,12 @@
 $text-font-stack: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
 
 $text-color: hsl(0, 0%, 13%) !default;
-$brand-color: hsl(339, 100%, 45%) !default;
+$brand-color: hsl(215, 100%, 60%) !default;
+$light-text-color: hsl(0, 0%, 90%) !default;
 $light-grey: hsl(0, 0%, 93%) !default;
 $mid-grey: hsl(0, 0%, 60%) !default;
 $dark-grey: hsl(0, 0%, 27%) !default;
+$error-color: hsl(0, 50%, 50%) !default;
 
 $container-max-width: 1180px !default;
 
