@@ -1,0 +1,16 @@
+<ng-container [formGroup]="formGroup">
+    <div class="form-error-container">
+        <label for="firstName" class="form-label">Prénom</label>
+        <input formControlName="firstName" type="text" class="form-control" id="InputFirstName">
+        @if (firstName.errors?.['required']) {
+            <small class="form-error">Ce champs est obligatoire</small>
+        } 
+    </div>
+    <div class="form-error-container">
+        <label for="lastName" class="form-label">Nom</label>
+        <input formControlName="lastName" type="text" class="form-control" id="InputLastName">
+        @if (lastName.errors?.['required']) {
+            <small class="form-error">Ce champs est obligatoire</small>
+        } 
+    </div>
+</ng-container>

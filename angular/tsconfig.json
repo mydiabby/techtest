@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -13,12 +14,20 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
+    "strictPropertyInitialization": false,
+    "strictNullChecks": false,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
+    "paths": {
+      "@core/*": ["src/app/core/*"],
+      "@env/*": ["src/environments/*"],
+      "@ui/*": ["src/app/ui/*"],
+      "@user/*": ["src/app/module/user/*"]
+    },  
     "lib": [
       "ES2022",
       "dom"

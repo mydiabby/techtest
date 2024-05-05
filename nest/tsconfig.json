@@ -15,6 +15,10 @@
     "strictNullChecks": false,
     "noImplicitAny": false,
     "strictBindCallApply": false,
+    "paths": {
+      "@core/*": ["src/application/core/*"],
+      "@user/*": ["src/application/module/user*"]
+    },  
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
   }

@@ -1,0 +1,18 @@
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Prénom</th>
+                <th>Nom</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (user of users; track user) {
+                <tr >
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

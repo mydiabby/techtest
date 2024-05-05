@@ -1,0 +1,5 @@
+<ng-content></ng-content>
+@if (backRoute) {
+    <button buttonSecondary type="button" id="buttonBack" class="me-2" [disabled]="validBusy()" [routerLink]="backRoute">{{backName}}</button>
+}
+<button buttonPrimary type="submit" id="buttonValid" [busy]="validBusy">{{validName}}</button>

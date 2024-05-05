@@ -1,0 +1,10 @@
+<div class="container my-5">
+    <div class="card shadow">
+        <div class="card-body p-5">
+            @if (title) {
+                <h5 class="text-primary text-center mb-5">{{title}}</h5>
+            }
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+@use "sass:map";
+
+@import 'variables.scss';
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+html {
+    display: flex;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    background: $body-background-color;
+}
+
+form {
+    label {
+        color: $primary;
+    }
+
+    .form-error-container {
+        position: relative;
+        margin-bottom: map.get($spacers, 4);
+
+        .form-error {
+            position: absolute;
+            bottom: -(map.get($spacers, 4));
+            color: $danger;
+        }
+    }
+
+    &.was-validated {
+        .ng-invalid {
+            @extend .is-invalid;
+        }
+    }
+
+    &:not(.was-validated) {
+        .form-error-container {
+            .form-error {
+                display: none;
+            }
+        }
+    
+    }
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+    box-shadow: $box-shadow;
+    transition: $transition-appearance;
+}
+
+.material-symbols-outlined {
+    font-size: 1rem;
+
+    &.material-symbols-spin {
+        animation: spin-animation 0.5s infinite;
+    }
+    
+    @keyframes spin-animation {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(359deg);
+        }
+    }
+}
+
+$maxpercent: 100;
+
+@for $i from 1 through $maxpercent {
+    .opacity-#{$i} {
+        opacity: ($i * 0.01) !important;
+    }
+}

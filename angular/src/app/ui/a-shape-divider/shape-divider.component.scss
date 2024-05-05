@@ -1,0 +1,22 @@
+@import 'variables';
+
+:host {
+    overflow: hidden;
+    z-index: -1;
+}
+
+svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 200px;
+    transform: rotateY(180deg);
+
+    .shape-fill-primary {
+        fill: $primary;
+    }
+    
+    .shape-fill-secondary {
+        fill: $secondary;
+    }
+}

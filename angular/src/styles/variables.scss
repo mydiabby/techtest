@@ -1,0 +1,25 @@
+// COLORS //
+$primary: #003b4f;
+$secondary: #357960;
+
+// BOOTSTRAP //
+$enable-validation-icons: false !default;
+$table-striped-bg: #fcfcfc !default;
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+  xxxl: 1750px
+) !default;
+
+// IMPORTS //
+@import '../../node_modules/bootstrap/scss/_functions.scss';
+@import '../../node_modules/bootstrap/scss/_mixins.scss';
+@import '../../node_modules/bootstrap/scss/_variables.scss';
+
+// APP //
+$body-background-color: #ebf0f2;
+$transition-appearance: background-color 0.5s, scale 0.5s, opacity 0.5s;

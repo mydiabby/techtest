@@ -1,0 +1,10 @@
+<app-card-container title="Liste des utilisateurs">
+    <button buttonSecondary type="button" class="my-4" routerLink="/user/create">Ajouter un utilisateur</button>
+    @if (users$ | async; as users) {
+        @if (users.length > 0) {
+            <app-users-list [users]="users"></app-users-list>
+        } @else {
+            <div>Aucun utilisateur à afficher</div>
+        }
+    }
+</app-card-container>

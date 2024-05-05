@@ -1,0 +1,6 @@
+<app-card-container title="Ajout d'un utilisateur">
+    <form [formGroup]="userCreateForm" (ngSubmit)="onSubmit()">
+        <app-user-create-form></app-user-create-form>
+        <app-form-buttons class="d-flex justify-content-center mt-4" [validBusy]="userCreateBusy" validName="Créer" backRoute="/users"></app-form-buttons>
+    </form>
+</app-card-container>
