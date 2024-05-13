@@ -1,15 +1,20 @@
+version: '3.3'
+
 services:
   nest:
+    image: techtest/nest-image:dev
     build:
+      context: .
       dockerfile: .docker/nest/Dockerfile
     restart: unless-stopped
     ports:
-      - ${NEST_PORT}:3000
+      - "${NEST_PORT}:3000"
     environment:
-      DB_HOST: db
-      DB_USER: root
-      DB_PASS: pass
-      DB_NAME: postgres
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      DB_PORT: ${DB_PORT}
     volumes:
       - ./nest:/home/node/app
     depends_on:
@@ -19,18 +24,19 @@ services:
     image: postgres:16.1-alpine3.19
     restart: always
     ports:
-      - ${DB_PORT}:5432
+      - "${DB_PORT}:5432"
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: postgres
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
 
   angular:
     build:
+      context: .
       dockerfile: .docker/angular/Dockerfile
     container_name: angular
     restart: unless-stopped
     ports:
-      - ${NG_PORT}:4200
+      - "${NG_PORT}:4200"
     volumes:
       - ./angular:/home/node/app
