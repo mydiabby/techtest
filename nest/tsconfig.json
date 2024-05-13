@@ -16,6 +16,29 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@adapters/*": [
+        "./src/repositories/adapters/*"
+      ],
+      "@controllers/*": [
+        "./src/controllers/*"
+      ],
+      "@dto/*": [
+        "./src/domain/dto/*"
+      ],
+      "@entities/*": [
+        "./src/domain/entities/*"
+      ],
+      "@ports/*": [
+        "./src/application/ports/*"
+      ],
+      "@schemas/*": [
+        "./src/repositories/schemas/*"
+      ],
+      "@use-cases/*": [
+        "./src/application/use-cases/*"
+      ],
+    },
   }
 }

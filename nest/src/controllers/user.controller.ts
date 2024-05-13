@@ -1,5 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
-import { GetFullNamesOfAllUsers } from 'src/application/use-cases/getFullNameOfAllUsers';
+import {Controller, Get} from '@nestjs/common';
+import { GetFullNamesOfAllUsers } from '@use-cases/getFullNameOfAllUsers';
 
 @Controller()
 export class UserController {

@@ -1,26 +1,26 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { UserServiceKey } from "./application/ports/user.port";
-import { GetFullNamesOfAllUsers } from "./application/use-cases/getFullNameOfAllUsers";
-import { HealthcheckController } from "./controllers/healthcheck.controller";
-import { UserController } from "./controllers/user.controller";
-import { UserAdapter } from "./repositories/adapters/user.adapter";
-import { UserSchema } from "./repositories/schemas/user.schema";
+import { UserServiceKey } from "@ports/user.port";
+import { GetFullNamesOfAllUsers } from "@use-cases/getFullNameOfAllUsers";
+import { UserController } from "@controllers/user.controller";
+import { UserAdapter } from "@adapters/user.adapter";
+import { UserSchema } from "@schemas/user.schema";
+import { HealthcheckController } from "@controllers/healthcheck.controller";
 
 @Module({
-    imports: [
-      TypeOrmModule.forFeature([UserSchema]),
-    ],
-    controllers: [
-      UserController,
-    ],
-    providers: [
-      {
-        provide: UserServiceKey,
-        useClass: UserAdapter,
-      },
-      GetFullNamesOfAllUsers,
-    ],
-  })
-  export class UserModule {}
-  
+  imports: [
+    TypeOrmModule.forFeature([UserSchema]),
+  ],
+  controllers: [
+    UserController,
+    HealthcheckController
+  ],
+  providers: [
+    {
+      provide: UserServiceKey,
+      useClass: UserAdapter,
+    },
+    GetFullNamesOfAllUsers,
+  ],
+})
+export class UserModule { }
