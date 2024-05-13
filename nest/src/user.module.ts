@@ -6,6 +6,7 @@ import { UserController } from "@controllers/user.controller";
 import { UserAdapter } from "@adapters/user.adapter";
 import { UserSchema } from "@schemas/user.schema";
 import { HealthcheckController } from "@controllers/healthcheck.controller";
+import { AddNewUser } from "@use-cases/addNewUser";
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { HealthcheckController } from "@controllers/healthcheck.controller";
       useClass: UserAdapter,
     },
     GetFullNamesOfAllUsers,
+    AddNewUser
   ],
 })
 export class UserModule { }

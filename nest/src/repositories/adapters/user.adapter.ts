@@ -4,6 +4,8 @@ import { UserService } from '@ports/user.port';
 import { User } from '@entities/user';
 import { UserSchema } from '@schemas/user.schema';
 import { Repository } from 'typeorm';
+import { CreateUserDTO } from '@dto/create-user';
+import { PaginationParams } from '@shared/types/pagination';
 
 @Injectable()
 export class UserAdapter implements UserService {
@@ -12,26 +14,41 @@ export class UserAdapter implements UserService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async getUsers(
-    sortBy: string = "firstName",
-    sortOrder: "ASC" | "DESC" = "ASC",
-    page: number = 1,
-    perPage: number = 10
-  ): Promise<{ users: User[]; totalUserCount: number }> {
+  async getUsers(params: PaginationParams = {} ): Promise<{ users: User[]; totalUserCount: number }> {
+    const { page = 1, perPage = 10,order } = params;
     try {
       const skip = (page - 1) * perPage;
-      const order = {};
-      order[sortBy] = sortOrder;
 
       const [users, totalCount] = await this.usersRepository.findAndCount({
-        order,
+        order: JSON.parse(order),
         skip,
         take: perPage
       });
 
       return { users, totalUserCount: totalCount };
     } catch (error) {
-      throw new HttpException("Failed to fetch users", HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('Failed to fetch users', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async addUser(createUserDTO: CreateUserDTO): Promise<User> {
+    const { firstName, lastName } = createUserDTO;
+
+    const existingUser = await this.usersRepository.findOne({
+      where: {
+        firstName,
+        lastName
+      }
+    });
+
+    if (existingUser) {
+      throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+    }
+
+    try {
+      return await this.usersRepository.save(createUserDTO);
+    } catch (error) {
+      throw new HttpException('Failed to create user', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 }

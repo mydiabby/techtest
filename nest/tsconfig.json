@@ -36,9 +36,12 @@
       "@schemas/*": [
         "./src/repositories/schemas/*"
       ],
+      "@shared/*": [
+        "./src/shared/*"
+      ],
       "@use-cases/*": [
         "./src/application/use-cases/*"
-      ],
+      ]
     },
   }
 }
