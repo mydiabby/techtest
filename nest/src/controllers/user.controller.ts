@@ -1,14 +1,14 @@
 import {Controller, Get} from '@nestjs/common';
 import { GetFullNamesOfAllUsers } from '@use-cases/getFullNameOfAllUsers';
 
-@Controller()
+@Controller('users')
 export class UserController {
   constructor(
-    private useCase: GetFullNamesOfAllUsers
-  ) {}
+    private useCaseListUsersSortedByName: GetFullNamesOfAllUsers,
+  ) { }
 
-  @Get('/users')
+  @Get('')
   async getFullNamesOfAllUsers(): Promise<string[]> {
-    return await this.useCase.execute();
+    return await this.useCaseListUsersSortedByName.execute();
   }
 }

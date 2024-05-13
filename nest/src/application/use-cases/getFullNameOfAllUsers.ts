@@ -10,7 +10,7 @@ export class GetFullNamesOfAllUsers {
     ) {}
 
     async execute(): Promise<string[]> {
-        const users = await this.userService.getUsers();
+        const {users, totalUserCount} = await this.userService.getUsers();
         return this.getListOfFullNamesOfUser(users);
     }
 

@@ -12,7 +12,26 @@ export class UserAdapter implements UserService {
     private usersRepository: Repository<User>,
   ) {}
 
-  getUsers(): Promise<User[]> {
-    return this.usersRepository.find();
+  async getUsers(
+    sortBy: string = "firstName",
+    sortOrder: "ASC" | "DESC" = "ASC",
+    page: number = 1,
+    perPage: number = 10
+  ): Promise<{ users: User[]; totalUserCount: number }> {
+    try {
+      const skip = (page - 1) * perPage;
+      const order = {};
+      order[sortBy] = sortOrder;
+
+      const [users, totalCount] = await this.usersRepository.findAndCount({
+        order,
+        skip,
+        take: perPage
+      });
+
+      return { users, totalUserCount: totalCount };
+    } catch (error) {
+      throw new HttpException("Failed to fetch users", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }
