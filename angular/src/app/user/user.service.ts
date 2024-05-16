@@ -12,7 +12,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(params: any): Observable<{ users: User[], totalCount: number }> {
-    return this.http.get<{ users: User[], totalCount: number }>(this.apiUrl + "/users", { params });
+  getUsers(params: any): Observable<{ users: User[], totalUserCount: number }> {
+    return this.http.get<{ users: User[], totalUserCount: number, id: number }>(this.apiUrl + "/users", { params });
   }
 }
