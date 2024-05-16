@@ -1,0 +1,45 @@
+<h1 class="text-center">Liste des users</h1>
+
+<div class="datatable-container mat-elevation-z8 margin">
+    @if (isLoadingResults || isRateLimitReached) {
+    <div class="datatable-loading-shade">
+      @if (isLoadingResults) {
+    <mat-spinner></mat-spinner>
+    }
+    @if (isRateLimitReached) {
+    <div class="datatable-rate-limit-reached">
+        La limite de débit de l'API a été atteinte. Elle sera réinitialisée dans une minute.
+    </div>
+    }
+    </div>
+    }
+
+    <div class="datatable-table-container align-center">
+
+        <table mat-table [dataSource]=data class="datatable-table"
+               matSort>
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>id</th>
+                <td mat-cell *matCellDef="let row">{{row.id}}</td>
+            </ng-container>
+            <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>lastName</th>
+                <td mat-cell *matCellDef="let row">{{row.lastName}}</td>
+            </ng-container>
+            <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                    firstName
+                </th>
+                <td mat-cell *matCellDef="let row">{{row.firstName}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+    <div class="mat-row" *matNoDataRow>
+        <div class="mat-cell" colspan="4">No data</div>
+    </div>
+
+    <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]=resultsLength [pageSize]=params.perPage
+                   aria-label="Select page of GitHub search results"></mat-paginator>
+</div>
