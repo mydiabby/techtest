@@ -6,6 +6,7 @@ import { UserSchema } from '@schemas/user.schema';
 import { Repository } from 'typeorm';
 import { CreateUserDTO } from '@dto/create-user';
 import { PaginationParams } from '@shared/types/pagination';
+import { UpdateUserDTO } from '@dto/update-user';
 
 @Injectable()
 export class UserAdapter implements UserService {
@@ -49,6 +50,42 @@ export class UserAdapter implements UserService {
       return await this.usersRepository.save(createUserDTO);
     } catch (error) {
       throw new HttpException('Failed to create user', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async updateUser(updateUserDTO: UpdateUserDTO): Promise<User> {
+    const { id, firstName, lastName } = updateUserDTO;
+
+    const existingUser = await this.usersRepository.findOne({
+      where: {
+        id,
+      }
+    });
+
+    if (!existingUser) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+
+    Object.assign(existingUser, { firstName, lastName });
+
+    try {
+      return this.usersRepository.save(existingUser);
+    } catch (error) {
+      throw new HttpException(
+        'Failed to create user',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  async deleteUser(userId: number): Promise<void> {
+    try {
+      await this.usersRepository.delete(userId);
+    } catch (error) {
+      throw new HttpException(
+        'Failed to delete user',
+        HttpStatus.INTERNAL_SERVER_ERROR
+      );
     }
   }
 }

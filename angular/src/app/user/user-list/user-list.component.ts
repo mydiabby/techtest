@@ -3,11 +3,14 @@ import {User} from "../../models/user.model";
 import {Component, ViewChild, AfterViewInit} from "@angular/core";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
 import {MatSort, MatSortModule} from "@angular/material/sort";
-import {merge, of as observableOf} from "rxjs";
+import {merge, of, of as observableOf} from "rxjs";
 import {catchError, map, startWith, switchMap} from "rxjs/operators";
-import {MatTableModule} from "@angular/material/table";
+import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatButton} from "@angular/material/button";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {UserAddComponent} from "../add-or-edit-user/add-or-edit-user.component";
+import {MatIconModule} from "@angular/material/icon";
 
 
 interface Params {
@@ -24,7 +27,8 @@ interface Params {
     MatProgressSpinnerModule,
     MatSort,
     MatSortModule,
-    MatButton
+    MatButton,
+    MatIconModule
   ],
   selector: "app-user-list",
   templateUrl: "./user-list.component.html",
@@ -34,15 +38,16 @@ interface Params {
 export class UserListComponent implements AfterViewInit {
   params: Params = {
     page: 1,
-    perPage: 2,
+    perPage: 20,
     order: {
       firstName: "asc",
       lastName: "asc"
     }
   };
-  pageSizeOptions = [2, 5, 10, 20];
-  displayedColumns: string[] = ["id", "firstName", "lastName"];
-  data = [{}];
+  pageSizeOptions = [20, 5, 10, 20];
+  displayedColumns: string[] = ["id", "firstName", "lastName", " "];
+  dataSource = new MatTableDataSource<User>();
+  data: { totalUserCount: number; users: User[] } = {totalUserCount: 0, users: []};
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
@@ -51,7 +56,8 @@ export class UserListComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{};
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private dialog: MatDialog) {
+    this.data = {totalUserCount: 0, users: []};
   }
 
   ngAfterViewInit() {
@@ -73,7 +79,7 @@ export class UserListComponent implements AfterViewInit {
             catchError(() => observableOf(null))
           );
         }),
-        map((data : {totalUserCount: number, users:  User[]}| null) => {
+        map((data: { totalUserCount: number, users: User[] } | null) => {
           this.isLoadingResults = false;
           this.isRateLimitReached = data === null;
 
@@ -84,7 +90,59 @@ export class UserListComponent implements AfterViewInit {
           return data.users;
         })
       )
-      .subscribe(data => (this.data = data));
+      .subscribe((data: User[]) => (this.dataSource.data = data));
+  }
+
+  addUser() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(UserAddComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      (newUser: User) => {
+        this.userService.addUser(newUser).pipe(
+          catchError(error => {
+            return of(null);
+          })
+        ).subscribe(user => {
+          if (user) {
+            this.dataSource.data.push(user)
+            this.paginator._changePageSize(this.paginator.pageSize);
+          }
+        });
+      }
+    );
+  }
+
+  updateUser(user: User) {
+    const {firstName, lastName, id} = user;
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      firstName,
+      lastName,
+      id
+    };
+
+    const dialogRef = this.dialog.open(UserAddComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      (user: User) => {
+        const {id} = user;
+        this.userService.updateUser(user, id).subscribe(updateUser => {
+          this.dataSource.data = this.dataSource.data.map(user => user.id === id ? updateUser : user);
+        });
+      }
+    );
+  }
+
+  deleteUser(userId: number) {
+    this.userService.deleteUser(userId).subscribe(() => {
+       this.dataSource.data = this.dataSource.data.filter(user => Number(user?.id) !== userId);
+    });
   }
 }
 

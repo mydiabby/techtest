@@ -15,4 +15,16 @@ export class UserService {
   getUsers(params: any): Observable<{ users: User[], totalUserCount: number }> {
     return this.http.get<{ users: User[], totalUserCount: number, id: number }>(this.apiUrl + "/users", { params });
   }
+
+  addUser(user: User): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/users`, user);
+  }
+
+  updateUser(user: User, userId: number | undefined): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/users/${userId}`, user);
+  }
+
+  deleteUser(userId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/users/${userId}`);
+  }
 }

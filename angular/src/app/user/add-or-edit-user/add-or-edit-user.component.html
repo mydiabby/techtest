@@ -1,0 +1,34 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-icon mat-card-avatar aria-hidden="false" margin="0">person</mat-icon>
+        <mat-card-title>Ajout d'un user</mat-card-title>
+        <button mat-icon-button (click)="close()" class="close-button">
+            <mat-icon aria-hidden="false">close</mat-icon>
+        </button>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-icon class="mat-icon-rtl-mirror" svgIcon="home"></mat-icon>
+
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <div>
+                <label>Prénom :</label>
+                <input type="text" formControlName="firstName">
+                <div *ngIf="userForm.controls['firstName'].invalid && (userForm.controls['firstName'].dirty || userForm.controls['firstName'].touched)">
+                    <div *ngIf="userForm.controls['firstName'].errors?.['required']" class="text-rouge">Le prénom est obligatoire.</div>
+                </div>
+            </div>
+
+            <div>
+                <label>Nom de famille :</label>
+                <input type="text" formControlName="lastName">
+                <div *ngIf="userForm.controls['lastName'].invalid && (userForm.controls['lastName'].dirty || userForm.controls['lastName'].touched)">
+                    <div *ngIf="userForm.controls['lastName'].errors?.['required']" class="text-rouge">Le nom de famille est obligatoire.
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" [disabled]="userForm.invalid">Soumettre</button>
+        </form>
+    </mat-card-content>
+</mat-card>
+

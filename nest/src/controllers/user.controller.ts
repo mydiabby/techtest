@@ -1,26 +1,36 @@
-import {Body, Controller, Get, Post, Query} from "@nestjs/common";
-import { GetFullNamesOfAllUsers } from '@use-cases/getFullNameOfAllUsers';
-import { AddNewUser } from '@use-cases/addNewUser';
+import {Body, Controller, Delete, Get, Param, Post, Put, Query} from "@nestjs/common";
+import { ManageUser } from '@use-cases/manageUser';
 import { CreateUserDTO } from '@dto/create-user';
 import { User } from '@entities/user';
 import { PaginationParams } from '@shared/types/pagination';
+import { UpdateUserDTO } from '@dto/update-user';
 
 @Controller('users')
 export class UserController {
   constructor(
-    private useCaseListUsersSortedByName: GetFullNamesOfAllUsers,
-    private useCaseAddUser: AddNewUser,
+    private useCaseManageUser: ManageUser,
   ) {}
 
   @Get('')
   async getFullNamesOfAllUsers(
     @Query() params: PaginationParams,
   ): Promise<{ users: User[], totalUserCount: number }> {
-    return await this.useCaseListUsersSortedByName.execute(params);
+    return await this.useCaseManageUser.execute(params);
   }
 
   @Post('')
   async addUser(@Body() createUserDTO: CreateUserDTO): Promise<User> {
-    return await this.useCaseAddUser.execute(createUserDTO);
+    return await this.useCaseManageUser.addUser(createUserDTO);
+  }
+
+  @Put(':id')
+  async updateUser(@Param("id") id: string, @Body() updateUserDTO: UpdateUserDTO): Promise<User> {
+    updateUserDTO.id = id;
+    return await this.useCaseManageUser.updateUser(updateUserDTO);
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<void> {
+    return this.useCaseManageUser.delete(Number(id));
   }
 }
