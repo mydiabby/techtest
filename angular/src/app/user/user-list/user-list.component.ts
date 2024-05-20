@@ -11,6 +11,7 @@ import {MatButton} from "@angular/material/button";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {UserAddComponent} from "../add-or-edit-user/add-or-edit-user.component";
 import {MatIconModule} from "@angular/material/icon";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 
 interface Params {
@@ -51,12 +52,13 @@ export class UserListComponent implements AfterViewInit {
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
+  refreshUsers = true;
 
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{};
 
-  constructor(private userService: UserService, private dialog: MatDialog) {
+  constructor(private userService: UserService, private dialog: MatDialog, private _snackBar: MatSnackBar) {
     this.data = {totalUserCount: 0, users: []};
   }
 
@@ -102,19 +104,32 @@ export class UserListComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe(
       (newUser: User) => {
-        this.userService.addUser(newUser).pipe(
-          catchError(error => {
-            return of(null);
-          })
-        ).subscribe(user => {
-          if (user) {
-            this.dataSource.data.push(user)
+        if (!newUser) {
+          return;
+        }
+        this.userService.addUser(newUser).subscribe(
+          user => {
+            if (!user) {
+              return;
+            }
+            this.dataSource.data.push(user);
+            this.refreshUsers = false;
+            this.openSnackBar("L'utilisateur a été créé avec succès.");
             this.paginator._changePageSize(this.paginator.pageSize);
+          },
+          error => {
+            this.openSnackBar("Une erreur est survenue lors de la création de l'utilisateur.");
+            console.error("Error adding user:", error);
           }
-        });
+        );
+      },
+      error => {
+        this.openSnackBar("Une erreur est survenue lors de la fermeture du dialogue.");
+        console.error("Erro=r after dialog closed:", error);
       }
     );
   }
+
 
   updateUser(user: User) {
     const {firstName, lastName, id} = user;
@@ -131,17 +146,45 @@ export class UserListComponent implements AfterViewInit {
 
     dialogRef.afterClosed().subscribe(
       (user: User) => {
+        if (!user) {
+          return;
+        }
         const {id} = user;
-        this.userService.updateUser(user, id).subscribe(updateUser => {
-          this.dataSource.data = this.dataSource.data.map(user => user.id === id ? updateUser : user);
-        });
+        this.userService.updateUser(user, id).subscribe(
+          updateUser => {
+            this.dataSource.data = this.dataSource.data.map(existingUser => existingUser.id === id ? updateUser : existingUser);
+            this.openSnackBar("Les modifications de l'utilisateur ont été enregistrées avec succès.");
+          },
+          error => {
+            this.openSnackBar("Une erreur est survenue lors de la mise à jour de l'utilisateur.");
+          }
+        );
+      },
+      error => {
+        this.openSnackBar("Une erreur est survenue lors de la fermeture du dialogue.");
       }
     );
   }
 
+
   deleteUser(userId: number) {
-    this.userService.deleteUser(userId).subscribe(() => {
-       this.dataSource.data = this.dataSource.data.filter(user => Number(user?.id) !== userId);
+    this.userService.deleteUser(userId).subscribe(
+      () => {
+        this.dataSource.data = this.dataSource.data.filter(user => Number(user?.id) !== userId);
+        this.openSnackBar("L'utilisateur a été supprimé avec succès.");
+      },
+      (error) => {
+        this.openSnackBar("Une erreur est survenue lors de la suppression de l'utilisateur.");
+      }
+    );
+  }
+
+
+  openSnackBar(wording: string) {
+    this._snackBar.open(wording, "", {
+      duration: 2000,
+      horizontalPosition: "center",
+      verticalPosition: "top"
     });
   }
 }
