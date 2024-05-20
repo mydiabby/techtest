@@ -60,6 +60,17 @@
       "ts"
     ],
     "rootDir": "src",
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/$1",
+      "^@use-cases/(.*)$": "<rootDir>/application/use-cases/$1",
+      "^@ports/(.*)$": "<rootDir>/application/ports/$1",
+      "^@dto/(.*)$": "<rootDir>/domain/dto/$1",
+      "^@adapters/(.*)$": "<rootDir>/repositories/adapters/$1",
+      "^@controllers/(.*)$": "<rootDir>/controllers/$1",
+      "^@entities/(.*)$": "<rootDir>/domain/entities/$1",
+      "^@schemas/(.*)$": "<rootDir>/repositories/schemas/$1",
+      "^@shared/(.*)$": "<rootDir>/shared/$1"
+    },
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
