@@ -39,13 +39,13 @@ interface Params {
 export class UserListComponent implements AfterViewInit {
   params: Params = {
     page: 1,
-    perPage: 20,
+    perPage: 5,
     order: {
       firstName: "asc",
       lastName: "asc"
     }
   };
-  pageSizeOptions = [20, 5, 10, 20];
+  pageSizeOptions = [5, 10, 50, 100];
   displayedColumns: string[] = ["id", "firstName", "lastName", " "];
   dataSource = new MatTableDataSource<User>();
   data: { totalUserCount: number; users: User[] } = {totalUserCount: 0, users: []};

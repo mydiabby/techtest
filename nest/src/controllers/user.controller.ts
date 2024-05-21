@@ -24,13 +24,13 @@ export class UserController {
   }
 
   @Put(':id')
-  async updateUser(@Param("id") id: string, @Body() updateUserDTO: UpdateUserDTO): Promise<User> {
+  async updateUser(@Param("id") id: number, @Body() updateUserDTO: UpdateUserDTO): Promise<User> {
     updateUserDTO.id = id;
     return await this.useCaseManageUser.updateUser(updateUserDTO);
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<void> {
-    return this.useCaseManageUser.delete(Number(id));
+  async delete(@Param('id') id: number): Promise<void> {
+    return this.useCaseManageUser.delete(id);
   }
 }

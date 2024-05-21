@@ -12,7 +12,7 @@
     }
     @if (isRateLimitReached) {
     <div class="datatable-rate-limit-reached">
-        La limite de débit de l'API a été atteinte. Elle sera réinitialisée dans une minute.
+        Aucune donnée disponible.
     </div>
     }
     </div>
@@ -56,5 +56,5 @@
     </div>
 
     <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]=resultsLength [pageSize]=params.perPage
-                   aria-label="Select page of GitHub search results"></mat-paginator>
+    ></mat-paginator>
 </div>

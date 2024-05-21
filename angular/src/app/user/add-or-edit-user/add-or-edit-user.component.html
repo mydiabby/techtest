@@ -1,13 +1,12 @@
 <mat-card class="example-card">
     <mat-card-header>
         <mat-icon mat-card-avatar aria-hidden="false" margin="0">person</mat-icon>
-        <mat-card-title>Ajout d'un user</mat-card-title>
+         {{ this.user && this.user.id ? 'Modification d\'un utilisateur' : 'Ajout d\'un utilisateur' }}
         <button mat-icon-button (click)="close()" class="close-button">
             <mat-icon aria-hidden="false">close</mat-icon>
         </button>
     </mat-card-header>
     <mat-card-content>
-        <mat-icon class="mat-icon-rtl-mirror" svgIcon="home"></mat-icon>
 
         <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
             <div>
