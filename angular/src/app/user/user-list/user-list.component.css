@@ -1,17 +1,27 @@
 button, h1 {
-  margin: 40px 8px 20px 50px;
+    margin: 20px 10px 20px;
+    color: white;
+    font-size: 12px;
 }
 
+h1 {
+    font-size: 34px;
+}
+
+@media (max-width: 768px) {
+h1 {
+    font-size:  24px;
+}
+}
 .datatable-container {
   margin: auto;
   width: 80%;
-  height: 60%;
+  background: white;
 }
 
 .datatable-table-container {
   position: relative;
   min-height: 200px;
-  max-height: 80%;
   overflow: auto;
 }
 
@@ -23,7 +33,6 @@ table {
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 56px;
   right: 0;
   background: rgba(0, 0, 0, 0.15);
   z-index: 1;
@@ -33,14 +42,7 @@ table {
 }
 
 .datatable-rate-limit-reached {
-  max-width: 360px;
   text-align: center;
-}
-
-/* Column Widths */
-.mat-column-number,
-.mat-column-state {
-  max-width: 64px;
 }
 
 .mat-column-created {
