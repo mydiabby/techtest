@@ -38,6 +38,5 @@ export class ListUsersComponent implements OnInit {
   ngOnInit(): void {
     this.getUsers().then((res: User[]) => {
       this.userList = res
-      console.log(this.userList)
     })}
 }

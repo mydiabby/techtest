@@ -19,7 +19,6 @@ export class UserController {
 
   @Post('/users/add') 
   async create (@Body() createUserDto:UserDto){
-    console.log("createUser",createUserDto)
     return await this.userAdapter.addUser(createUserDto);
   }
 

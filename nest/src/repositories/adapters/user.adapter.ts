@@ -20,10 +20,9 @@ export class UserAdapter implements UserService {
   async addUser(newUser:UserDto): Promise<User>{
     try {
     const newUserData = await this.usersRepository.create(newUser);
-    console.log("newUserData",newUserData)
     return this.usersRepository.save(newUserData)}
      catch(error){
-      console.log(error)
+      console.log("error",error)
     } 
     return null
     
