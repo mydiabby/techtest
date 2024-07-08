@@ -19,6 +19,7 @@ const {
       username: DB_USER,
       password: DB_PASS,
       database: DB_NAME,
+      entities: [__dirname + '/../**/*.entity{.ts,.js}'], // Chemin vers les entités
       autoLoadEntities: true,
       synchronize: true,
     }),

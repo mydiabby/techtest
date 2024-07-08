@@ -1,0 +1,25 @@
+<div class="formContent">
+<h1>Want to join our cool people club?</h1>
+    <h3>Apply here to join the club!</h3>
+    <form [formGroup]="userForm" (ngSubmit)="handleSubmit()" class="form">
+        <mat-label>Please enter your surname</mat-label>    
+        <mat-form-field class="inputField">
+        <input type="text" matInput formControlName="surname"
+                placeholder="Franco">
+        </mat-form-field>
+        <mat-label>Please enter your name</mat-label>
+        <mat-form-field class="inputField">
+          
+            <input type="text" matInput formControlName="name"
+                placeholder="James">
+        </mat-form-field>
+        <mat-label>Please enter your Email</mat-label>
+        <mat-form-field class="inputField">
+            
+            <input type="email" matInput formControlName="email"
+                placeholder="john.doe@gmail.com">
+        </mat-form-field>
+        <button type="submit" class="subButton" >Enter the cool people's club!</button>
+    </form>
+</div>
+    

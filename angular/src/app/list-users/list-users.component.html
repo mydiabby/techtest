@@ -1,0 +1,15 @@
+
+<div class="listContainer">
+    <h1 >Our cool people list</h1>
+    <ul class="userList">
+                    @for(user of userList; track $index){
+                            <li class="userTab">
+                                <p>{{user.firstName}}</p> <br/>
+                                <p>{{user.lastName}}</p> <br/>
+                                
+                            </li>
+                        
+                    }
+</ul>
+
+</div>
