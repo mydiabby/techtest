@@ -4,9 +4,12 @@
     <ul class="userList">
                     @for(user of userList; track $index){
                             <li class="userTab">
-                                <p>{{user}}</p> <br/>
+                                <p>{{user.firstName}}</p> <br/>
+                                <p>{{user.lastName}}</p> <br/>
+                                
                             </li>
                         
                     }
 </ul>
+
 </div>

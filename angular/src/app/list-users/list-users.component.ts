@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 
-export type User = {
+type User = {
   id:string,
   firstName:string,
   lastName:string,
@@ -19,16 +19,21 @@ export type User = {
 })
 export class ListUsersComponent implements OnInit {
   
-  
   userList: User[] = []
 
-  async getUsers (): Promise<User[]> {
-    // TODO: use services.
-    try {
-      const response = await fetch ("http://localhost:3000/users") // env v
-      const users = await response.json()
+  ngOnInit(): void { // = useEffect en react 
+      this.getUsers().then((res: User[]) => {
+        this.userList = res
+      })
+  }
 
-      return users as User[]
+  async getUsers (): Promise<User[]> {
+    // use services.
+    try {
+      const response = await fetch ("http://localhost:3000/users") 
+      const users = await response.json()
+      console.log("users",users)
+      return users?.body as User[]
     } catch (e) {
       console.log("e", e)
     }
@@ -38,5 +43,6 @@ export class ListUsersComponent implements OnInit {
   ngOnInit(): void {
     this.getUsers().then((res: User[]) => {
       this.userList = res
+      console.log(this.userList)
     })}
 }
