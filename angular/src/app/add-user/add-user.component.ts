@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatInputModule  } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { PostService } from '../../post.service';
 
 @Component({
   selector: 'app-add-user',
@@ -10,18 +11,31 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
   ],
   templateUrl: './add-user.component.html',
-  styleUrl: './add-user.component.css'
+  styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent {
-  userForm = new FormGroup({
-    email: new FormControl('',[Validators.required, Validators.email]),
-    name: new FormControl('', Validators.required),
-    surname: new FormControl('', Validators.required),
+
+  userData = new FormGroup({
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
   })
-  handleSubmit () {
-    console.log(this.userForm.value)
+
+  constructor(private postService:PostService){}
+
+  createPost(){
+    const formData = this.userData.value;
+
+    console.log(formData)
+    this.postService.createPost(formData).subscribe(
+      response => {
+        console.log('User créé avec succès!', response)
+      },
+      error => {
+        console.error("Erreur dans le post",error)
+      }
+    )
   }
-  get emailFormControl() {
-    return this.userForm.get('email');
+  handleSubmit () {
+    console.log(this.userData.value)
   }
 }
