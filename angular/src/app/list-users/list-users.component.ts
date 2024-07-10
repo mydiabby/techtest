@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User, UserService } from '../../post.service';
+import { User, UserService } from '../../user.service';
 
 @Component({
   selector: 'app-list-users',
@@ -19,5 +19,15 @@ export class ListUsersComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.userList = this.userService.getUsers()}
+    this.userService.getUsers().subscribe(
+      response => {
+        this.userList = response
+        console.log("List recupérée avec succes!", response)
+      },
+      error => {
+        console.error('Error retrieving the users list', error)
+      }
+    )
+  
+  }
 }

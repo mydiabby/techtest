@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { environment } from './environments/environment';
 
 export type User = {
   id:string,
@@ -15,8 +15,8 @@ export type User = {
 })
 
 export class UserService {
-  private postUrl = 'http://localhost:3000/users/add'
-  private getUrl =  "http://localhost:3000/users"
+  private postUrl = `${environment.apiUrl}/users/add`
+  private getUrl =  `${environment.apiUrl}/users/`
 
   constructor(private http: HttpClient) {}
 
