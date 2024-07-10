@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatInputModule  } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { PostService } from '../../post.service';
+import { UserService } from '../../post.service';
 
 @Component({
   selector: 'app-add-user',
@@ -20,12 +20,10 @@ export class AddUserComponent {
     lastName: new FormControl('', Validators.required),
   })
 
-  constructor(private postService:PostService){}
+  constructor(private postService:UserService){}
 
   createPost(){
     const formData = this.userData.value;
-
-    console.log(formData)
     this.postService.createPost(formData).subscribe(
       response => {
         console.log('User créé avec succès!', response)
@@ -34,8 +32,5 @@ export class AddUserComponent {
         console.error("Erreur dans le post",error)
       }
     )
-  }
-  handleSubmit () {
-    console.log(this.userData.value)
   }
 }
