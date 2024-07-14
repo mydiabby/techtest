@@ -7,12 +7,12 @@ export type User = {
   id:string,
   firstName:string,
   lastName:string,
-  email:string
 }
 
 @Injectable({
   providedIn: 'root'
 })
+
 
 export class UserService {
   private postUrl = `${environment.apiUrl}/users/add`
@@ -20,8 +20,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  createPost(data: any): Observable<any> {
-    console.log('createPost launched', data)
+  createUser(data: any): Observable<any> {
     return this.http.post(this.postUrl, data);
   }
 

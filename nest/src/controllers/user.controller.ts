@@ -4,12 +4,13 @@ import { GetFullNamesOfAllUsers } from 'src/application/use-cases/getFullNameOfA
 import { UserDto } from 'src/dto/userDto';
 import { UserAdapter } from 'src/repositories/adapters/user.adapter';
 import { UserServiceKey } from "src/application/ports/user.port";
+import { CreateUser } from "src/application/use-cases/createUser";
 
 @Controller()
 export class UserController {
   constructor(
     private useCase: GetFullNamesOfAllUsers,
-    @Inject(UserServiceKey) private readonly userAdapter: UserAdapter
+    private createUserCase: CreateUser,
   ) {}
 
   @Get('/users')
@@ -19,7 +20,6 @@ export class UserController {
 
   @Post('/users/add') 
   async create (@Body() createUserDto:UserDto){
-    return await this.userAdapter.addUser(createUserDto);
+      return await this.createUserCase.execute(createUserDto);
   }
-
 }

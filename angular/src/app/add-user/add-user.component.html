@@ -1,7 +1,7 @@
 <div class="formContent">
 <h1>Want to join our cool people club?</h1>
     <h3>Apply here to join the club!</h3>
-    <form [formGroup]="userData" (ngSubmit)="createPost()" class="form">
+    <form [formGroup]="userData" (ngSubmit)="createUser()" class="form">
         <mat-label>Please enter your surname</mat-label>    
         <mat-form-field class="inputField">
         <input type="text" matInput formControlName="firstName"
@@ -9,10 +9,14 @@
         </mat-form-field>
         <mat-label>Please enter your name</mat-label>
         <mat-form-field class="inputField">
-          
             <input type="text" matInput formControlName="lastName"
                 placeholder="James">
         </mat-form-field>
+        @if (error) {
+            <span>
+                {{error}}
+            </span>
+        }
         <button type="submit" class="subButton" >Enter the cool people's club!</button>
     </form>
 </div>

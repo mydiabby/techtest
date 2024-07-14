@@ -22,7 +22,6 @@ export class ListUsersComponent implements OnInit {
     this.userService.getUsers().subscribe(
       response => {
         this.userList = response
-        console.log("List recupérée avec succes!", response)
       },
       error => {
         console.error('Error retrieving the users list', error)

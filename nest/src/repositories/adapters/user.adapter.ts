@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserService } from 'src/application/ports/user.port';
 import { User } from 'src/domain/entities/user';
@@ -17,15 +17,16 @@ export class UserAdapter implements UserService {
     return this.usersRepository.find();
   }
 
-  async addUser(newUser:UserDto): Promise<User>{
-    try {
-    const newUserData = await this.usersRepository.create(newUser);
-    return this.usersRepository.save(newUserData)}
-     catch(error){
-      console.log("error",error)
-    } 
-    return null
-    
+  async getUserBy(firstName, lastName) {
+    return await this.usersRepository.findOne({
+      where: {
+        firstName,
+        lastName,
+      }
+    });
   }
 
+  async addUser(newUser: UserDto): Promise<User>{ 
+    const newUserData = await this.usersRepository.create(newUser);
+    return this.usersRepository.save(newUserData)}
 }
