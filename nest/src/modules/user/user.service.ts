@@ -13,7 +13,12 @@ export class UserService {
 
   //Get Users
   async getUsers(): Promise<User[]> {
-    return this.userRepository.find();
+    return this.userRepository.find({
+      order: {
+        firstname: 'DESC',
+        lastname: 'ASC',
+      },
+    });
   }
 
   //Get the list of all the names of the users
@@ -21,7 +26,7 @@ export class UserService {
     const users = await this.getUsers();
     if (!users) return [];
     const fullnames: string[] = users.map(
-      (user) => `${user.firstName} ${user.lastName}`,
+      (user) => `${user.firstname} ${user.lastname}`,
     );
     return fullnames;
   }

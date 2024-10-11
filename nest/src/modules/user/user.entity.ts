@@ -3,19 +3,21 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
+  Unique,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
+@Unique(['firstname', 'lastname'])
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column('text')
-  firstName: string;
+  firstname: string;
 
   @Column('text')
-  lastName: string;
+  lastname: string;
 
   @CreateDateColumn()
   createdAt: Date;
