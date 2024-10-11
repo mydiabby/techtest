@@ -1,14 +1,9 @@
 import { Module } from '@nestjs/common';
-import { HealthcheckController } from './controllers/healthcheck.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { HealthcheckController } from './controllers/healthcheck.controller';
 import { UserModule } from './user.module';
 
-const {
-  DB_HOST,
-  DB_USER,
-  DB_PASS,
-  DB_NAME,
-} = process.env;
+const { DB_HOST, DB_USER, DB_PASS, DB_NAME } = process.env;
 
 @Module({
   imports: [
@@ -24,9 +19,7 @@ const {
     }),
     UserModule,
   ],
-  controllers: [
-    HealthcheckController
-  ],
+  controllers: [HealthcheckController],
   providers: [],
 })
 export class AppModule {}
