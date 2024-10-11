@@ -8,12 +8,15 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import ResponseInterceptor from './application/interceptors/response.interceptor';
 
 //Business Modules
-import { HealthCheckModule } from './modules/healthcheck/healthcheck.module';
 import { UserModule } from './modules/users/user.module';
 
+//Controller
+import { AppController } from './app.controller';
+
+
 @Module({
-  imports: [TypeormModule, HealthCheckModule, UserModule],
-  controllers: [],
+  imports: [TypeormModule, UserModule],
+  controllers: [AppController],
   providers: [
     {
       provide: APP_INTERCEPTOR,
