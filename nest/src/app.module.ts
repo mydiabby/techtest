@@ -8,11 +8,10 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import ResponseInterceptor from './application/interceptors/response.interceptor';
 
 //Business Modules
-import { UserModule } from './modules/users/user.module';
+import { UserModule } from './modules/user/user.module';
 
 //Controller
 import { AppController } from './app.controller';
-
 
 @Module({
   imports: [TypeormModule, UserModule],
