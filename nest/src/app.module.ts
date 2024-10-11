@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 import { HealthcheckController } from './controllers/healthcheck.controller';
 import { UserModule } from './user.module';
 
@@ -19,7 +21,7 @@ const { DB_HOST, DB_USER, DB_PASS, DB_NAME } = process.env;
     }),
     UserModule,
   ],
-  controllers: [HealthcheckController],
-  providers: [],
+  controllers: [HealthcheckController, AppController],
+  providers: [AppService],
 })
 export class AppModule {}
