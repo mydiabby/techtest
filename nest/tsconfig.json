@@ -16,7 +16,20 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@/*": ["src/*"],
+      "@Application/*": ["src/application/*"],
+      "@Interfaces/*": ["src/interfaces/*"],
+      "@Modules/*": ["src/modules/*"],
+      "@Api/*": ["src/api/*"],
+      "@Infrastructure/*": ["src/infrastructure/*"],
+      "@Interceptors/*": ["src/application/interceptors/*"],
+      "@Entities/*": ["src/entities/*"],
+      "@Guards/*": ["src/application/guards/*"],
+      "@Decorators/*": ["src/application/decorators/*"],
+      "@Tools/*": ["src/application/tools/*"]
+    }
   },
   "watchOptions": {
     "watchFile": "fixedPollingInterval"
