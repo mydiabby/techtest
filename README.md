@@ -28,3 +28,22 @@ Le rendu devra être effectué sous forme de pull request sur ce repo.
 
 
 Bon courage !
+
+-----
+
+# Test Mathieu
+
+## Angular :
+- L'application peut tourner avec des données en in memory, pour cela il suffit de changer la valeur `production` à false dans le fichier `env.ts`
+- En remettant la valeur à `true`, l'application va chercher les données via l'API NestJS et la DB
+
+Des tests unitaires ont été ajoutés sur les uses cases
+
+## NestJS :
+- Copier le .env.template à la racine de /nest et le renommer en .env
+
+Des tests e2e ont été ajoutés pour les différentes routes
+
+## Setup bdd : 
+- RDV dans le container nest, ouvrir un terminal et lancer la commande `npm run migration:up`
+- Dans le même terminal, lancer la commande `npm run db:seed` pour ajouter de la data dans la bdd

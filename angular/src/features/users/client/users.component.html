@@ -1,0 +1,22 @@
+<section>
+  <div class="users-list-title-section">
+    <h1>Liste des utilisateurs</h1>
+    <button (click)="onRequestAddUser()" >+</button>
+  </div>
+  <div class="users-list">
+    <table>
+      <tr>
+        <th>Nom</th>
+        <th>Actions</th>
+      </tr>
+      @for (user of users; track user.id) {
+        <tr>
+          <td>{{ user.fullName }}</td>
+          <td>
+            <button>Delete</button>
+          </td>
+        </tr>
+      }
+    </table>
+  </div>
+</section>

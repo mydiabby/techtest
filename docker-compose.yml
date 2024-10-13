@@ -14,6 +14,8 @@ services:
       - ./nest:/home/node/app
     depends_on:
       - db
+    networks:
+      - myDiabby
 
   db:
     image: postgres:16.1-alpine3.19
@@ -24,6 +26,8 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: postgres
+    networks:
+      - myDiabby
 
   angular:
     build:
@@ -34,3 +38,9 @@ services:
       - ${NG_PORT}:4200
     volumes:
       - ./angular:/home/node/app
+    networks:
+      - myDiabby
+
+networks:
+    myDiabby:
+        driver: bridge

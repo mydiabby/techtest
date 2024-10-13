@@ -1,0 +1,54 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+button {
+  cursor: pointer;
+  border: none;
+  box-shadow: #776E72 2px 2px 5px;
+  border-radius: 5px;
+  background: none;
+  font-size: large;
+  color: #362C54;
+  padding: 0.5em 1em;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: #362C54;
+    color: white;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: #9782A0;
+  font-size: large;
+  transition: color 0.2s;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #362C54;
+    transition: width 0.2s;
+  }
+
+  &:hover {
+    color: #362C54;
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+section {
+  width: 1000px;
+  margin: 20px auto;
+}
+
+.error-message {
+  color: red;
+  padding: 10px;
+}

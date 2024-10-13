@@ -1,0 +1,14 @@
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.home-navigation {
+  display: flex;
+  justify-content: center;
+  column-gap: 10%;
+  margin-top: 50px;
+}

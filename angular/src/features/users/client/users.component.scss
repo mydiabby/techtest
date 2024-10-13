@@ -1,0 +1,24 @@
+.users-list-title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  margin: 40px 0;
+
+}
+
+.users-list {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: auto 0;
+}
+
+table {
+  width: 100%;
+  td, th {
+    padding: 10px;
+    border: 1px solid #e9ecef;
+    text-align: center;
+  }
+}

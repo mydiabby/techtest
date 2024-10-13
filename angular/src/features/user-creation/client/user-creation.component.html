@@ -1,0 +1,18 @@
+<section>
+  <div class="add-user-title-section"><h1>Ajouter un utilisateur</h1></div>
+
+  <form (ngSubmit)="onCreateNewUser($event)">
+    <div class="form-control">
+      <label for="firstName">Prénom</label>
+      <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" required>
+    </div>
+    <div class="form-control">
+      <label for="lastName">Nom</label>
+      <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" required>
+    </div>
+    <button type="submit">Ajouter</button>
+    @if (this.error) {
+      <div class="error-message">{{ this.error }}</div>
+    }
+  </form>
+</section>
