@@ -22,7 +22,6 @@ export class UserController {
   //Add User
   @Post('create')
   async addUser(@Body() body: UserCreateInput): Promise<User> {
-    console.log('🚀 ~ UserController ~ addUser ~ body:', body);
     return await this.userService.addUser(body);
   }
 }

@@ -3,13 +3,12 @@
     <button
       pButton
       pRipple
-      label="New"
+      label="New User"
       icon="pi pi-plus"
       class="p-button-success mr-2"
       (click)="openNew()"
     ></button>
   </ng-template>
-
   <ng-template pTemplate="right"> </ng-template>
 </p-toolbar>
 
@@ -29,6 +28,8 @@
   dataKey="id"
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   [showCurrentPageReport]="true"
+  sortField="firstname" 
+  [sortOrder]="1" 
 >
   <ng-template pTemplate="caption">
     <div class="flex align-items-center justify-content-between">
@@ -40,10 +41,10 @@
       <th style="width: 3rem">
         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
       </th>
-      <th pSortableColumn="name">
+      <th pSortableColumn="firstname">
         Firstname <p-sortIcon field="name"></p-sortIcon>
       </th>
-      <th pSortableColumn="name">
+      <th pSortableColumn="lastname">
         Lastname <p-sortIcon field="name"></p-sortIcon>
       </th>
       <th></th>
@@ -56,29 +57,6 @@
       </td>
       <td>{{ user.firstname }}</td>
       <td>{{ user.lastname }}</td>
-      <td>
-        <p-rating
-          [ngModel]="user.rating"
-          [readonly]="true"
-          [cancel]="false"
-        ></p-rating>
-      </td>
-      <td>
-        <button
-          pButton
-          pRipple
-          icon="pi pi-pencil"
-          class="p-button-rounded p-button-success mr-2"
-          (click)="editUser(user)"
-        ></button>
-        <button
-          pButton
-          pRipple
-          icon="pi pi-trash"
-          class="p-button-rounded p-button-warn"
-          (click)="deleteUser(user)"
-        ></button>
-      </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary">
@@ -98,18 +76,35 @@
   <ng-template pTemplate="content">
     <div class="flex flex-column gap-3">
       <div class="flex flex-column gap-2">
-        <label for="name">Name</label>
-        <input
-          type="text"
-          pInputText
-          id="name"
-          [(ngModel)]="user.firstname"
-          required
-          autofocus
-        />
-        <small style="color: #e24c4c" *ngIf="!user.firstname || !user.lastname"
-          >Name is required.</small
-        >
+        <div>
+          <label for="firstname">Firstname</label>
+          <input
+            type="text"
+            pInputText
+            id="firstname"
+            [(ngModel)]="user.firstname"
+            required
+            autofocus
+          />
+          <small style="color: #e24c4c" *ngIf="!user.firstname"
+            >Firstname is required.</small
+          >
+        </div>
+        <div>
+          <label for="lastname">Lastname</label>
+          <input
+            type="text"
+            pInputText
+            id="lastname"
+            [(ngModel)]="user.lastname"
+            required
+            autofocus
+          />
+
+          <small style="color: #e24c4c" *ngIf="!user.lastname"
+            >Lastname is required.</small
+          >
+        </div>
       </div>
     </div>
   </ng-template>
@@ -118,10 +113,10 @@
     <button
       pButton
       pRipple
-      label="Save"
+      label="Add User"
       icon="pi pi-check"
       class="p-button-text"
-      (click)="saveUser()"
+      (click)="saveUser(user)"
     ></button>
   </ng-template>
 </p-dialog>

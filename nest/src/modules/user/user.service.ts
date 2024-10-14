@@ -15,7 +15,7 @@ export class UserService {
   async getUsers(): Promise<User[]> {
     return this.userRepository.find({
       order: {
-        firstname: 'DESC',
+        firstname: 'ASC',
         lastname: 'ASC',
       },
     });
