@@ -1,0 +1,120 @@
+<button
+  pButton
+  pRipple
+  label="Add User"
+  icon="pi pi-plus"
+  class="p-button-text"
+  routerLink="/users/add"
+  (click)="addUserLink()"
+></button>
+
+
+
+<p-table
+  #dt
+  [value]="users"
+  [rows]="10"
+  [paginator]="true"
+  [globalFilterFields]="[
+    'name',
+    'country.name',
+    'representative.name',
+    'status'
+  ]"
+  [(selection)]="selectedUsers"
+  [rowHover]="true"
+  dataKey="id"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [showCurrentPageReport]="true"
+  sortField="firstname"
+  [sortOrder]="1"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex align-items-center justify-content-between">
+      <h5 class="m-0">Manage Users</h5>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 3rem">
+        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+      </th>
+      <th pSortableColumn="firstname">
+        Firstname <p-sortIcon field="name"></p-sortIcon>
+      </th>
+      <th pSortableColumn="lastname">
+        Lastname <p-sortIcon field="name"></p-sortIcon>
+      </th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-user>
+    <tr>
+      <td>
+        <p-tableCheckbox [value]="user"></p-tableCheckbox>
+      </td>
+      <td>{{ user.firstname }}</td>
+      <td>{{ user.lastname }}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="flex align-items-center justify-content-between">
+      In total there are {{ users ? users.length : 0 }} users.
+    </div>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  [(visible)]="userDialog"
+  [style]="{ width: '450px' }"
+  header="User Details"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="flex flex-column gap-3">
+      <div class="flex flex-column gap-2">
+        <div>
+          <label for="firstname">Firstname</label>
+          <input
+            type="text"
+            pInputText
+            id="firstname"
+            [(ngModel)]="user.firstname"
+            required
+            autofocus
+          />
+          <small style="color: #e24c4c" *ngIf="!user.firstname"
+            >Firstname is required.</small
+          >
+        </div>
+        <div>
+          <label for="lastname">Lastname</label>
+          <input
+            type="text"
+            pInputText
+            id="lastname"
+            [(ngModel)]="user.lastname"
+            required
+            autofocus
+          />
+
+          <small style="color: #e24c4c" *ngIf="!user.lastname"
+            >Lastname is required.</small
+          >
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Add User"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="saveUser(user)"
+    ></button>
+  </ng-template>
+</p-dialog>

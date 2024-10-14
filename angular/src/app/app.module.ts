@@ -1,44 +1,34 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http'; // Pour les requêtes HTTP
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Pour les Reactive Forms
+
+import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ConfirmationService } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { DialogModule } from 'primeng/dialog';
-import { IconFieldModule } from 'primeng/iconfield';
-import { InputIconModule } from 'primeng/inputicon';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { RadioButtonModule } from 'primeng/radiobutton';
-import { RatingModule } from 'primeng/rating';
-import { TableModule } from 'primeng/table';
-import { ToolbarModule } from 'primeng/toolbar';
+import { RouterLink, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { routes } from './app.routes';
+
+//Prime Angular
+import { ButtonModule } from 'primeng/button';
+import { MenuModule } from 'primeng/menu';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
+    // BrowserModule,
     FormsModule,
-    TableModule,
-    HttpClientModule,
-    InputTextModule,
-    DialogModule,
-    ToolbarModule,
-    ConfirmDialogModule,
-    RatingModule,
-    InputNumberModule,
-    InputTextareaModule,
-    RadioButtonModule,
+    CommonModule,
+    ReactiveFormsModule, // Import ReactiveFormsModule
+    HttpClientModule, // Import HttpClientModule
+    RouterModule.forRoot(routes), // Configuration des routes,
+    RouterLink,
+    MenuModule,
+    BrowserAnimationsModule,
     ButtonModule,
-    IconFieldModule,
-    InputIconModule,
+    TableModule,
   ],
-  providers: [ConfirmationService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
