@@ -1,3 +1,10 @@
 .env
 .idea
 .vscode
+
+.user.env
+.blaze/*
+!.blaze/helpers
+!.blaze/variables.*
+!.blaze/jpath
+user-variables.*

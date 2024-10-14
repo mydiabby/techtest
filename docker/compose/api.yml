@@ -1,0 +1,20 @@
+services:
+  api:
+    container_name: api
+    build:
+      dockerfile: ./dockerfiles/Dockerfile.api-dev
+      args:
+        - HOST_UID=${UID}
+    environment:
+      - API_CONFIG_PATH=${API_CONFIG_PATH}
+    healthcheck:
+      test: "curl -f http://127.0.0.1/health"
+      interval: 10s
+      timeout: 30s
+      retries: 10
+      start_period: 30s
+      start_interval: 2s
+    expose:
+      - 80
+    volumes:
+      - ${WORKSPACE_ROOT}:/home/dev/workspace

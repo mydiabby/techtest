@@ -1,0 +1,16 @@
+services:
+  e2e:
+    container_name: e2e
+    build:
+      dockerfile: ./dockerfiles/Dockerfile.e2e-dev
+      args:
+        - HOST_UID=${UID}
+    volumes:
+      - ${WORKSPACE_ROOT}:/home/dev/workspace
+    environment:
+      - E2E_DB_HOST=${E2E_DB_HOST}
+      - E2E_DB_PORT=${E2E_DB_PORT}
+      - E2E_DB_USERNAME=${E2E_DB_USERNAME}
+      - E2E_DB_PASSWORD=${E2E_DB_PASSWORD}
+      - E2E_DB_DATABASE=${E2E_DB_DATABASE}
+      - E2E_FRONTEND_ORIGIN=${E2E_FRONTEND_ORIGIN}

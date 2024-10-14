@@ -1,0 +1,9 @@
+include:
+  - compose/volumes.yml
+services:
+  database:
+    extends:
+      file: ./compose/database.yml
+      service: database
+    ports:
+      - '127.0.0.1:4002:5432'

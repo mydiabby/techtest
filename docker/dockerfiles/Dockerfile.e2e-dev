@@ -1,0 +1,18 @@
+FROM node:21-bookworm
+
+ARG HOST_UID
+
+RUN apt update && \
+    apt install -y curl && \
+    curl -sSf --tlsv1.3 https://downloads.blaze-monorepo.dev/versions/latest/builds/x86_64-linux-gnu/package | tar zx && install -t /usr/local/bin blaze
+
+RUN useradd --uid ${HOST_UID} --shell /bin/sh --home-dir /home/dev --create-home dev
+
+RUN npx --yes playwright install --with-deps
+
+WORKDIR /home/dev/workspace
+USER dev
+
+RUN npx --yes playwright install
+
+ENTRYPOINT ["blaze", "run", "e2e:run"]

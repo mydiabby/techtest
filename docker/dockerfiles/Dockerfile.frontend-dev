@@ -1,0 +1,15 @@
+# Base image
+FROM node:21.5-alpine3.18
+
+ARG HOST_UID
+
+RUN apk update && \
+    apk add curl && \
+    curl -sSf --tlsv1.3 https://downloads.blaze-monorepo.dev/versions/latest/builds/x86_64-linux-musl/package | tar zx && install -t /usr/local/bin blaze
+
+RUN adduser --uid ${HOST_UID} --shell /bin/sh --home /home/dev --disabled-password dev
+USER dev
+
+WORKDIR /home/dev/workspace
+
+ENTRYPOINT ["blaze", "run", "frontend:serve"]

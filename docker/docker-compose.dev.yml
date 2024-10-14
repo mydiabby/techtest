@@ -1,0 +1,26 @@
+include:
+  - compose/volumes.yml
+services:
+  database:
+    extends:
+      file: ./compose/database.yml
+      service: database
+  api:
+    extends:
+      file: ./compose/api.yml
+      service: api
+    ports:
+      - 127.0.0.1:4001:80
+    depends_on:
+      database:
+        condition: service_healthy
+  frontend:
+    extends:
+      file: ./compose/frontend.yml
+      service: frontend
+    ports:
+      - 127.0.0.1:4000:80
+    depends_on:
+      api:
+        condition: service_healthy
+  

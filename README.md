@@ -26,5 +26,65 @@ N'hésite pas à ajouter toute autre fonctionnalité que tu juges pertinente (te
 
 Le rendu devra être effectué sous forme de pull request sur ce repo.
 
-
 Bon courage !
+
+## How-to ?
+
+Les commandes documentées nécessitent [Blaze](https://blaze-monorepo.dev/docs/guides/get-started).
+
+Attention, le workspace n'est pas configuré pour fonctionner sur Windows.
+
+### Dev en mode local
+
+Lancer l'application en mode de développement local : 
+
+```sh
+blaze run docker:database-up
+```
+
+```sh
+blaze run api:serve
+```
+
+```sh
+blaze run frontend:serve
+```
+
+L'application sera disponible sur `http://127.0.0.1:4000`.
+
+### Tests E2E en mode local
+
+1) [Installer Playwright et ses dépendences système](https://playwright.dev/docs/intro)
+2) [Lancer l'application en mode dev local](#mode-dev-local)
+3) Lancer les tests avec `blaze run e2e:run`
+
+Attention, l'API devra être lancée en mode de connexion avec la base de données prévues pour les tests E2E :
+
+```sh
+blaze --str-var 'api.configPath=configurations/e2e-local.json' run api:serve
+```
+
+### Dev en mode Docker
+
+Lancer l'application en mode de développement via Docker Compose :
+
+```sh
+blaze run docker:dev-up
+```
+
+L'application sera disponible sur `http://127.0.0.1:4000`.
+
+Lancer les tests E2E via Docker Compose :
+
+```sh
+blaze run docker:e2e-up
+```
+
+### Nettoyage
+
+Tout nettoyer (dépendances, caches, volumes...) :
+
+```sh
+blaze run -t clean -a
+```
+

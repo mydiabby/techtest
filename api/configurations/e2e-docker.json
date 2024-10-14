@@ -1,0 +1,30 @@
+{
+    "env": "dev",
+    "database": {
+        "username": "postgres",
+        "password": "postgres",
+        "database": "e2e",
+        "migrate": true,
+        "port": 5432,
+        "host": "database"
+    },
+    "http": {
+        "frontend": {
+            "allowedOrigins": [
+                "http://frontend"
+            ]
+        },
+        "allowedHosts": [
+            "api",
+            "127.0.0.1",
+            "localhost"
+        ],
+        "bind": {
+            "addr": "0.0.0.0",
+            "port": 80
+        },
+        "openapi": {
+            "expose": false
+        }
+    }
+}

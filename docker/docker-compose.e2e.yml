@@ -1,0 +1,31 @@
+include:
+  - compose/volumes.yml
+services:
+  database:
+    extends:
+      file: ./compose/database.yml
+      service: database
+  api:
+    extends:
+      file: ./compose/api.yml
+      service: api
+    depends_on:
+      database:
+        condition: service_healthy
+  frontend:
+    extends:
+      file: ./compose/frontend.yml
+      service: frontend
+    depends_on:
+      api:
+        condition: service_healthy
+  e2e:
+    extends:
+      file: ./compose/e2e.yml
+      service: e2e
+    depends_on:
+      frontend:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+  
