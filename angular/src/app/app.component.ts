@@ -1,13 +1,32 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { User } from '../interfaces/user.interface';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  providers: [ConfirmationService, MessageService],
 })
-export class AppComponent {
-  title = 'ng-app';
+export class AppComponent implements OnInit {
+  users: User[] = [];
+  selectedUsers: User[] = [];
+  user: User = {};
+  submitted: boolean = false;
+  userDialog: boolean = false;
+
+  constructor() {}
+
+  ngOnInit() {}
+
+  openNew() {
+    this.user = {};
+    this.submitted = false;
+    this.userDialog = true;
+  }
+
+  deleteSelectedProducts() {}
+  saveUser() {}
+  deleteUser(user: User) {}
+  editUser(user: User) {}
 }
