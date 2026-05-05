@@ -16,5 +16,5 @@ export const UserSchema = new EntitySchema<User>({
     lastName: {
       type: String,
     },
-  }
+  },
 });

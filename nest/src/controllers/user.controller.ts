@@ -3,9 +3,7 @@ import { GetFullNamesOfAllUsers } from 'src/application/use-cases/getFullNameOfA
 
 @Controller()
 export class UserController {
-  constructor(
-    private useCase: GetFullNamesOfAllUsers
-  ) {}
+  constructor(private useCase: GetFullNamesOfAllUsers) {}
 
   @Get('/users')
   async getFullNamesOfAllUsers(): Promise<string[]> {
