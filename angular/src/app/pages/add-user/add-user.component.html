@@ -1,0 +1,36 @@
+<div class="max-w-md mx-auto mt-12 p-6">
+  <h1>Ajouter un utilisateur</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col gap-4">
+    <mat-form-field appearance="outline">
+      <mat-label>Prénom</mat-label>
+      <input matInput formControlName="firstName" />
+      @if (form.controls.firstName | controlError: "Le prénom"; as error) {
+        <mat-error>{{ error }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nom</mat-label>
+      <input matInput formControlName="lastName" />
+      @if (form.controls.lastName | controlError: "Le nom"; as error) {
+        <mat-error>{{ error }}</mat-error>
+      }
+    </mat-form-field>
+
+    @if (errorMessage) {
+      <p class="text-red-600 text-sm">{{ errorMessage }}</p>
+    }
+
+    <div class="flex gap-2 justify-end">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid || submitting"
+      >
+        {{ submitting ? "Ajout en cours..." : "Ajouter" }}
+      </button>
+    </div>
+  </form>
+</div>
