@@ -15,4 +15,16 @@ export class UserAdapter implements UserService {
   getUsers(): Promise<User[]> {
     return this.usersRepository.find();
   }
+
+  findByFirstAndLastName(
+    firstName: string,
+    lastName: string,
+  ): Promise<User | null> {
+    return this.usersRepository.findOne({ where: { firstName, lastName } });
+  }
+
+  async createUser(firstName: string, lastName: string): Promise<User> {
+    const user = this.usersRepository.create({ firstName, lastName });
+    return this.usersRepository.save(user);
+  }
 }
