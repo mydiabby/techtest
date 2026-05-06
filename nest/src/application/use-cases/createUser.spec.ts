@@ -27,14 +27,17 @@ describe('CreateUser', () => {
     expect(result).toBe(created);
   });
 
-  it('throws a ConflictException when a user with the same name already exists', async () => {
+  it('throws a ConflictException with USER_ALREADY_EXISTS code when a user with the same name already exists', async () => {
     userService.findByFirstAndLastName.mockResolvedValue(
       new User('1', 'Simon', 'Dupont'),
     );
 
-    await expect(useCase.execute('Simon', 'Dupont')).rejects.toThrow(
-      ConflictException,
-    );
+    const promise = useCase.execute('Simon', 'Dupont');
+
+    await expect(promise).rejects.toThrow(ConflictException);
+    await expect(promise).rejects.toMatchObject({
+      response: { code: 'USER_ALREADY_EXISTS' },
+    });
     expect(userService.createUser).not.toHaveBeenCalled();
   });
 });

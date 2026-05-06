@@ -1,6 +1,7 @@
 import { Injectable, Inject, ConflictException } from '@nestjs/common';
 import { UserService, UserServiceKey } from '../ports/user.port';
 import { User } from 'src/domain/entities/user';
+import { UserErrorCode } from 'src/domain/errors/user-error-codes';
 
 @Injectable()
 export class CreateUser {
@@ -16,9 +17,10 @@ export class CreateUser {
     );
 
     if (existing) {
-      throw new ConflictException(
-        `Un utilisateur avec le nom "${firstName} ${lastName}" existe déjà.`,
-      );
+      throw new ConflictException({
+        code: UserErrorCode.UserAlreadyExists,
+        message: `A user with the name "${firstName} ${lastName}" already exist`,
+      });
     }
 
     return this.userService.createUser(firstName, lastName);
