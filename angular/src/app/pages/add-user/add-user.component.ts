@@ -1,6 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroupDirective,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -30,6 +35,8 @@ export class AddUserComponent {
   private userService = inject(UserService);
   private snackBar = inject(MatSnackBar);
 
+  @ViewChild(FormGroupDirective) formDirective!: FormGroupDirective;
+
   submitting = false;
   errorMessage: string | null = null;
 
@@ -51,6 +58,8 @@ export class AddUserComponent {
         this.snackBar.open('Utilisateur ajouté avec succès.', 'Fermer', {
           duration: 5000,
         });
+        this.formDirective.resetForm();
+        this.submitting = false;
       },
       error: (err: HttpErrorResponse) => {
         this.submitting = false;
