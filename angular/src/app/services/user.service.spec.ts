@@ -6,6 +6,7 @@ import {
 import { provideHttpClient } from '@angular/common/http';
 
 import { UserService } from './user.service';
+import { environment } from '../../environments/environment';
 
 describe('UserService', () => {
   let service: UserService;
@@ -28,7 +29,7 @@ describe('UserService', () => {
       service.getUsers().subscribe();
 
       const req = httpMock.expectOne(
-        (r) => r.url === 'http://localhost:3000/users',
+        (r) => r.url === `${environment.apiUrl}/users`,
       );
       expect(req.request.method).toBe('GET');
       expect(req.request.params.keys().length).toBe(0);
@@ -39,7 +40,7 @@ describe('UserService', () => {
       service.getUsers({ sortBy: 'firstName', sortDir: 'desc' }).subscribe();
 
       const req = httpMock.expectOne(
-        (r) => r.url === 'http://localhost:3000/users',
+        (r) => r.url === `${environment.apiUrl}/users`,
       );
       expect(req.request.params.get('sortBy')).toBe('firstName');
       expect(req.request.params.get('sortDir')).toBe('desc');
@@ -51,7 +52,7 @@ describe('UserService', () => {
     it('sends a POST to /users with firstName and lastName', () => {
       service.createUser('Simon', 'Dupont').subscribe();
 
-      const req = httpMock.expectOne('http://localhost:3000/users');
+      const req = httpMock.expectOne(`${environment.apiUrl}/users`);
       expect(req.request.method).toBe('POST');
       expect(req.request.body).toEqual({
         firstName: 'Simon',
@@ -68,7 +69,7 @@ describe('UserService', () => {
         done();
       });
 
-      httpMock.expectOne('http://localhost:3000/users').flush(expected);
+      httpMock.expectOne(`${environment.apiUrl}/users`).flush(expected);
     });
   });
 });

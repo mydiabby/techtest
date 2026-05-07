@@ -10,6 +10,7 @@ services:
       DB_USER: root
       DB_PASS: pass
       DB_NAME: postgres
+      FRONT_URL: ${FRONT_URL}
     volumes:
       - ./nest:/home/node/app
     depends_on:
