@@ -1,0 +1,16 @@
+{
+  "name": "mydiabby-techtest",
+  "version": "1.0.0",
+  "private": true,
+  "description": "myDiabby technical test",
+  "scripts": {
+    "install:all": "npm install --prefix nest && npm install --prefix angular",
+    "test": "npm run test:nest && npm run test:angular",
+    "test:nest": "npm test --prefix nest",
+    "test:angular": "npm test --prefix angular -- --watch=false --browsers=ChromeHeadless",
+    "format": "npm run format --prefix nest && npm run format --prefix angular",
+    "start": "docker compose up -d",
+    "stop": "docker compose stop",
+    "reset": "docker compose down -v"
+  }
+}

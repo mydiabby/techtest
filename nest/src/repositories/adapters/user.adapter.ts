@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserService } from 'src/application/ports/user.port';
+import { GetUsersOptions, UserService } from 'src/application/ports/user.port';
 import { User } from 'src/domain/entities/user';
 import { UserSchema } from '../schemas/user.schema';
 import { Repository } from 'typeorm';
@@ -12,7 +12,29 @@ export class UserAdapter implements UserService {
     private usersRepository: Repository<User>,
   ) {}
 
-  getUsers(): Promise<User[]> {
-    return this.usersRepository.find();
+  getUsers(options?: GetUsersOptions): Promise<User[]> {
+    const sortBy = options?.sortBy ?? 'lastName';
+    const sortDir = options?.sortDir === 'desc' ? 'DESC' : 'ASC';
+    const fallback = sortBy === 'lastName' ? 'firstName' : 'lastName';
+
+    return this.usersRepository.find({
+      order: { [sortBy]: sortDir, [fallback]: 'ASC' },
+    });
+  }
+
+  findByFirstAndLastName(
+    firstName: string,
+    lastName: string,
+  ): Promise<User | null> {
+    return this.usersRepository
+      .createQueryBuilder('user')
+      .where('LOWER(user.firstName) = LOWER(:firstName)', { firstName })
+      .andWhere('LOWER(user.lastName) = LOWER(:lastName)', { lastName })
+      .getOne();
+  }
+
+  async createUser(firstName: string, lastName: string): Promise<User> {
+    const user = this.usersRepository.create({ firstName, lastName });
+    return this.usersRepository.save(user);
   }
 }
