@@ -26,7 +26,11 @@ export class UserAdapter implements UserService {
     firstName: string,
     lastName: string,
   ): Promise<User | null> {
-    return this.usersRepository.findOne({ where: { firstName, lastName } });
+    return this.usersRepository
+      .createQueryBuilder('user')
+      .where('LOWER(user.firstName) = LOWER(:firstName)', { firstName })
+      .andWhere('LOWER(user.lastName) = LOWER(:lastName)', { lastName })
+      .getOne();
   }
 
   async createUser(firstName: string, lastName: string): Promise<User> {
