@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserServiceKey } from './application/ports/user.port';
-import { GetFullNamesOfAllUsers } from './application/use-cases/getFullNameOfAllUsers';
 import { CreateUser } from './application/use-cases/createUser';
+import { GetAllUsers } from './application/use-cases/getAllUsers';
 import { UserController } from './controllers/user.controller';
 import { UserAdapter } from './repositories/adapters/user.adapter';
 import { UserSchema } from './repositories/schemas/user.schema';
@@ -15,7 +15,7 @@ import { UserSchema } from './repositories/schemas/user.schema';
       provide: UserServiceKey,
       useClass: UserAdapter,
     },
-    GetFullNamesOfAllUsers,
+    GetAllUsers,
     CreateUser,
   ],
 })

@@ -13,7 +13,9 @@ export class UserAdapter implements UserService {
   ) {}
 
   getUsers(): Promise<User[]> {
-    return this.usersRepository.find();
+    return this.usersRepository.find({
+      order: { lastName: 'ASC', firstName: 'ASC' },
+    });
   }
 
   findByFirstAndLastName(
