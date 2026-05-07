@@ -44,6 +44,14 @@ describe('AddUserComponent', () => {
     expect(component.form.valid).toBeTrue();
   });
 
+  it('is invalid when a field exceeds 50 characters', () => {
+    component.form.setValue({
+      firstName: 'a'.repeat(51),
+      lastName: 'Dupont',
+    });
+    expect(component.form.controls.firstName.hasError('maxlength')).toBeTrue();
+  });
+
   it("doesn't call createUser when the form is invalid", () => {
     component.form.setValue({ firstName: 'S', lastName: '' });
     component.submit();
@@ -59,6 +67,27 @@ describe('AddUserComponent', () => {
     component.submit();
 
     expect(userService.createUser).toHaveBeenCalledWith('Simon', 'Dupont');
+  });
+
+  it('trims whitespace before sending values', () => {
+    userService.createUser.and.returnValue(
+      of({ id: 1, firstName: 'Simon', lastName: 'Dupont' }),
+    );
+
+    component.form.setValue({
+      firstName: '  Simon  ',
+      lastName: '  Dupont  ',
+    });
+    component.submit();
+
+    expect(userService.createUser).toHaveBeenCalledWith('Simon', 'Dupont');
+  });
+
+  it('does not call createUser when trimmed value is too short', () => {
+    component.form.setValue({ firstName: '  S  ', lastName: '  Dupont  ' });
+    component.submit();
+
+    expect(userService.createUser).not.toHaveBeenCalled();
   });
 
   it('redirects to /users after a successful creation', () => {

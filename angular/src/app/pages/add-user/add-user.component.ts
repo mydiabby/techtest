@@ -36,17 +36,31 @@ export class AddUserComponent {
   errorMessage: string | null = null;
 
   form = this.formBulder.nonNullable.group({
-    firstName: ['', [Validators.required, Validators.minLength(2)]],
-    lastName: ['', [Validators.required, Validators.minLength(2)]],
+    firstName: [
+      '',
+      [Validators.required, Validators.minLength(2), Validators.maxLength(50)],
+    ],
+    lastName: [
+      '',
+      [Validators.required, Validators.minLength(2), Validators.maxLength(50)],
+    ],
   });
 
   submit() {
     if (this.form.invalid || this.submitting) return;
 
+    const firstName = this.form.controls.firstName.value.trim();
+    const lastName = this.form.controls.lastName.value.trim();
+
+    if (firstName.length < 2 || lastName.length < 2) {
+      this.form.controls.firstName.setValue(firstName);
+      this.form.controls.lastName.setValue(lastName);
+      this.form.markAllAsTouched();
+      return;
+    }
+
     this.submitting = true;
     this.errorMessage = null;
-
-    const { firstName, lastName } = this.form.getRawValue();
 
     this.userService.createUser(firstName, lastName).subscribe({
       next: () => {

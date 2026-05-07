@@ -20,6 +20,10 @@ export class ControlErrorPipe implements PipeTransform {
       const min = control.errors['minlength'].requiredLength;
       return `${label} doit contenir au moins ${min} caractères.`;
     }
+    if (control.errors['maxlength']) {
+      const max = control.errors['maxlength'].requiredLength;
+      return `${label} ne doit pas dépasser ${max} caractères.`;
+    }
     return null;
   }
 }
