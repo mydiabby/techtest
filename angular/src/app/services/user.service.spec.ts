@@ -23,6 +23,30 @@ describe('UserService', () => {
     httpMock.verify();
   });
 
+  describe('getUsers', () => {
+    it('sends a GET to /users with no params when no options are provided', () => {
+      service.getUsers().subscribe();
+
+      const req = httpMock.expectOne(
+        (r) => r.url === 'http://localhost:3000/users',
+      );
+      expect(req.request.method).toBe('GET');
+      expect(req.request.params.keys().length).toBe(0);
+      req.flush([]);
+    });
+
+    it('sends sortBy and sortDir as query params when provided', () => {
+      service.getUsers({ sortBy: 'firstName', sortDir: 'desc' }).subscribe();
+
+      const req = httpMock.expectOne(
+        (r) => r.url === 'http://localhost:3000/users',
+      );
+      expect(req.request.params.get('sortBy')).toBe('firstName');
+      expect(req.request.params.get('sortDir')).toBe('desc');
+      req.flush([]);
+    });
+  });
+
   describe('createUser', () => {
     it('sends a POST to /users with firstName and lastName', () => {
       service.createUser('Simon', 'Dupont').subscribe();

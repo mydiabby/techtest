@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserService } from 'src/application/ports/user.port';
+import { GetUsersOptions, UserService } from 'src/application/ports/user.port';
 import { User } from 'src/domain/entities/user';
 import { UserSchema } from '../schemas/user.schema';
 import { Repository } from 'typeorm';
@@ -12,9 +12,13 @@ export class UserAdapter implements UserService {
     private usersRepository: Repository<User>,
   ) {}
 
-  getUsers(): Promise<User[]> {
+  getUsers(options?: GetUsersOptions): Promise<User[]> {
+    const sortBy = options?.sortBy ?? 'lastName';
+    const sortDir = options?.sortDir === 'desc' ? 'DESC' : 'ASC';
+    const fallback = sortBy === 'lastName' ? 'firstName' : 'lastName';
+
     return this.usersRepository.find({
-      order: { lastName: 'ASC', firstName: 'ASC' },
+      order: { [sortBy]: sortDir, [fallback]: 'ASC' },
     });
   }
 

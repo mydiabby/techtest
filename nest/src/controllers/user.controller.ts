@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CreateUser } from 'src/application/use-cases/createUser';
 import { GetAllUsers } from 'src/application/use-cases/getAllUsers';
 import { CreateUserDto } from './dtos/create-user.dto';
+import { GetUsersQueryDto } from './dtos/get-users-query.dto';
 import { UserResponseDto } from './dtos/user-response.dto';
 
 @Controller()
@@ -12,8 +13,8 @@ export class UserController {
   ) {}
 
   @Get('/users')
-  async getUsers(): Promise<UserResponseDto[]> {
-    const users = await this.getAllUsersUseCase.execute();
+  async getUsers(@Query() query: GetUsersQueryDto): Promise<UserResponseDto[]> {
+    const users = await this.getAllUsersUseCase.execute(query);
     return users.map(UserResponseDto.fromEntity);
   }
 

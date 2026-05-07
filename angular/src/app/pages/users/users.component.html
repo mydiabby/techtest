@@ -13,14 +13,21 @@
   } @else if (errorMessage) {
     <p class="text-red-600">{{ errorMessage }}</p>
   } @else {
-    <table mat-table [dataSource]="users" class="w-full">
+    <table
+      mat-table
+      [dataSource]="users"
+      matSort
+      matSortDisableClear
+      (matSortChange)="onSortChange($event)"
+      class="w-full"
+    >
       <ng-container matColumnDef="firstName">
-        <th mat-header-cell *matHeaderCellDef>Prénom</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Prénom</th>
         <td mat-cell *matCellDef="let user">{{ user.firstName }}</td>
       </ng-container>
 
       <ng-container matColumnDef="lastName">
-        <th mat-header-cell *matHeaderCellDef>Nom</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
         <td mat-cell *matCellDef="let user">{{ user.lastName }}</td>
       </ng-container>
 
